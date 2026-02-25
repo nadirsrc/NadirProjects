@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nadirprojects</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">nadir<span>projects</span></a>
+            <div class="nav-links">
+                <a href="#projects" class="nav-link">projects</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#projects" class="mobile-link">projects</a>
+    </div>
+
+    <header class="hero">
+        <div class="hero-content">
+            <p class="hero-label">school & personal — <span id="totalProjects">0</span> projects</p>
+            <h1 class="hero-title">nadir<br>projects.</h1>
+            <p class="hero-desc">A collection of projects I've built — from school assignments to personal experiments. All in one place, just click and explore.</p>
+        </div>
+    </header>
+
+    <section class="section" id="recent">
+        <div class="container">
+            <div class="recent-header">
+                <h2 class="section-title">Recently added</h2>
+                <span class="recent-badge" id="recentCount"></span>
+            </div>
+            <div class="recent-list" id="recentList">
+                <!-- rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="projects">
+        <div class="container">
+            <h2 class="section-title">All projects</h2>
+
+            <div class="toolbar">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search projects..." autocomplete="off" spellcheck="false">
+                </div>
+                <div class="filter-buttons" id="filterButtons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                </div>
+            </div>
+
+            <div class="projects-list" id="projectsGrid">
+                <!-- rendered by JS -->
+            </div>
+
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <p>No results found. Try a different keyword?</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <span class="footer-brand">nadirprojects</span>
+                <span class="footer-note">&copy; 2026 — school & personal projects.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

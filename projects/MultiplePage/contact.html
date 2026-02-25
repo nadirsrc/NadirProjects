@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { dark: '#020617', primary: '#6366f1', secondary: '#a855f7' },
+                    fontFamily: { heading: ['Outfit'], body: ['Inter'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark text-slate-200 font-body">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass border-b border-white/10">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-heading font-bold text-white">Nadir<span class="text-primary">.</span></a>
+            <ul class="hidden md:flex space-x-8">
+                <li><a href="index.html" class="nav-link hover:text-white transition">Home</a></li>
+                <li><a href="about.html" class="nav-link hover:text-white transition">About</a></li>
+                <li><a href="projects.html" class="nav-link hover:text-white transition">Projects</a></li>
+                <li><a href="contact.html" class="nav-link text-primary font-bold">Contact</a></li>
+            </ul>
+            <button id="menu-btn" class="md:hidden text-white text-2xl"><i class="fas fa-bars"></i></button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-dark/95 backdrop-blur-xl border-t border-white/10 absolute w-full">
+            <ul class="flex flex-col p-6 space-y-4">
+                <li><a href="index.html" class="block hover:text-primary">Home</a></li>
+                <li><a href="about.html" class="block hover:text-primary">About</a></li>
+                <li><a href="projects.html" class="block hover:text-primary">Projects</a></li>
+                <li><a href="contact.html" class="block text-primary">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contact Content -->
+    <main class="pt-32 pb-20 container mx-auto px-6">
+        <div class="text-center mb-16 animate-fade-up">
+            <h2 class="text-4xl font-heading font-bold text-white mb-4">Get In <span class="text-primary">Touch</span></h2>
+            <p class="text-slate-400">Feel free to send a message or connect via social media.</p>
+        </div>
+
+        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-10 bg-white/5 backdrop-blur-lg border border-white/10 p-8 rounded-2xl animate-fade-up delay-100">
+            
+            <!-- Contact Info -->
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Information</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center text-primary"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <p class="text-sm text-slate-400">Email</p>
+                                <a href="mailto:muhamadnadir6709@gmail.com" class="text-white hover:text-primary transition">muhamadnadir6709@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center text-primary"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <p class="text-sm text-slate-400">Location</p>
+                                <a href="https://maps.app.goo.gl/FT4Xi9Q6MNL98XTz6" target="_blank" class="text-white hover:text-primary transition">South Tangerang, Indonesia</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Social Media</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://www.instagram.com/nadirxyz" target="_blank" class="social-icon bg-pink-600"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@nadzxv" target="_blank" class="social-icon bg-black border border-white/20"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/+6281218007556" target="_blank" class="social-icon bg-green-500"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form action="https://formspree.io/f/movlgpzg" method="POST" class="space-y-4">
+                <div>
+                    <label class="block text-sm text-slate-400 mb-1">Name</label>
+                    <input type="text" name="name" required class="input-field">
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-400 mb-1">Email</label>
+                    <input type="email" name="email" required class="input-field">
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-400 mb-1">Message</label>
+                    <textarea name="message" rows="4" required class="input-field"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-primary to-secondary text-white font-bold py-3 rounded-lg hover:opacity-90 transition transform hover:-translate-y-1">Send Message</button>
+            </form>
+
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="index.html" class="text-slate-400 hover:text-white transition"><i class="fas fa-arrow-left mr-2"></i> Back to Home</a>
+        </div>
+    </main>
+
+    <footer class="py-6 text-center text-slate-500 border-t border-white/5 text-sm">
+        &copy; 2025 Muhammad Nadir. All Rights Reserved.
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

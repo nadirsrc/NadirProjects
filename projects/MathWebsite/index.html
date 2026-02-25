@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math</title>
+    
+    <!-- Link ke CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Config Warna -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        bg: '#121212',      
+                        card: '#1E1E1E',    
+                        border: '#333333',  
+                        muted: '#a3a3a3'    
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50 glass-nav border-b border-border">
+        <div class="max-w-4xl mx-auto px-6 h-16 flex justify-between items-center">
+            <div class="font-bold text-lg tracking-wide text-white">
+                Math
+            </div>
+            
+            <div class="flex space-x-6 md:space-x-8 text-sm font-medium text-muted">
+                <button onclick="pindahHalaman('home')" id="btn-home" class="nav-link hover:text-white transition py-5">Beranda</button>
+                <button onclick="pindahHalaman('materi')" id="btn-materi" class="nav-link hover:text-white transition py-5">Materi</button>
+                <button onclick="pindahHalaman('soal')" id="btn-soal" class="nav-link hover:text-white transition py-5">Latihan Soal</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- KONTEN UTAMA -->
+    <main class="flex-grow max-w-3xl mx-auto px-6 py-12 w-full">
+
+        <!-- ================= HALAMAN HOME ================= -->
+        <div id="home" class="halaman active">
+            <div class="text-center py-10 md:py-16">
+                <!-- Tambah class elemen-animasi + delay -->
+                <div class="elemen-animasi delay-1 inline-block px-4 py-1 rounded-full border border-border bg-card text-xs text-muted mb-6 tracking-widest">
+                    Kelompok 5
+                </div>
+                <h1 class="elemen-animasi delay-2 text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                    Persamaan<br>Lingkaran
+                </h1>
+                <p class="elemen-animasi delay-3 text-muted text-base md:text-lg max-w-lg mx-auto mb-10 leading-relaxed">
+                    Media pembelajaran interaktif mengenai konsep persamaan lingkaran yang menyinggung sumbu koordinat kartesius.
+                </p>
+                <div class="elemen-animasi delay-3 flex justify-center gap-4">
+                    <button onclick="pindahHalaman('materi')" class="px-8 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition shadow-lg hover:shadow-white/20">
+                        Pelajari Materi
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kartu Menu Cepat -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                <!-- Tambah class elemen-animasi di kartu -->
+                <button onclick="pindahHalaman('materi')" class="menu-card group elemen-animasi delay-1">
+                    <div class="icon-wrapper">
+                        <svg width="80" height="80" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="30" class="stroke-white" stroke-width="2" fill="none" />
+                            <circle cx="50" cy="50" r="3" fill="red" />
+                            <line x1="50" y1="50" x2="80" y2="50" stroke="red" stroke-dasharray="4" />
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-white group-hover:text-green-400 transition">Rumus Dasar</h3>
+                    <p class="text-xs text-muted mt-2">Bentuk umum persamaan.</p>
+                </button>
+
+                <button onclick="pindahHalaman('materi')" class="menu-card group elemen-animasi delay-2">
+                    <div class="icon-wrapper">
+                         <svg width="100" height="80" viewBox="0 0 100 80">
+                            <line x1="0" y1="70" x2="100" y2="70" stroke="gray" stroke-width="2" />
+                            <circle cx="50" cy="40" r="30" class="stroke-white" stroke-width="2" fill="none" />
+                            <line x1="50" y1="40" x2="50" y2="70" stroke="red" stroke-dasharray="4" />
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-white group-hover:text-green-400 transition">Sumbu X</h3>
+                    <p class="text-xs text-muted mt-2">Menyinggung sumbu horizontal.</p>
+                </button>
+
+                <button onclick="pindahHalaman('materi')" class="menu-card group elemen-animasi delay-3">
+                    <div class="icon-wrapper">
+                        <svg width="80" height="80" viewBox="0 0 80 100">
+                            <line x1="10" y1="0" x2="10" y2="100" stroke="gray" stroke-width="2" />
+                            <circle cx="40" cy="50" r="30" class="stroke-white" stroke-width="2" fill="none" />
+                            <line x1="40" y1="50" x2="10" y2="50" stroke="red" stroke-dasharray="4" />
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-white group-hover:text-green-400 transition">Sumbu Y</h3>
+                    <p class="text-xs text-muted mt-2">Menyinggung sumbu vertikal.</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= HALAMAN MATERI ================= -->
+        <div id="materi" class="halaman">
+            <div class="mb-8 border-b border-border pb-6 elemen-animasi">
+                <h2 class="text-3xl font-bold text-white mb-2">Materi Pembelajaran</h2>
+                <p class="text-muted">Rangkuman konsep dasar dan analisis grafik.</p>
+            </div>
+
+            <div class="space-y-12">
+                <!-- Bagian 1 -->
+                <div class="space-y-4 elemen-animasi">
+                    <h3 class="judul-bab border-white">1. Konsep Dasar Persamaan Lingkaran</h3>
+                    <p class="text-muted leading-relaxed">
+                        Untuk menyusun persamaan lingkaran, terdapat dua komponen utama yang harus diketahui:
+                    </p>
+                    <ul class="grid grid-cols-2 gap-4 text-sm">
+                        <li class="bg-card p-4 rounded-lg border border-border">
+                            <span class="block font-bold text-white mb-1">Titik Pusat (a, b)</span>
+                            Koordinat titik tengah lingkaran.
+                        </li>
+                        <li class="bg-card p-4 rounded-lg border border-border">
+                            <span class="block font-bold text-white mb-1">Jari-jari (r)</span>
+                            Jarak dari titik pusat ke tepi lingkaran.
+                        </li>
+                    </ul>
+                    <p class="text-muted text-sm mt-2">Rumus umum persamaan lingkaran adalah:</p>
+                    <div class="rumus-box transform hover:scale-[1.02] transition duration-300">
+                        <span class="text-2xl md:text-3xl font-bold text-white tracking-wider">(x - a)² + (y - b)² = r²</span>
+                    </div>
+                </div>
+
+                <!-- Bagian 2 (Sumbu X) -->
+                <div class="space-y-4 elemen-animasi">
+                    <h3 class="judul-bab border-green-500">2. Lingkaran Menyinggung Sumbu X</h3>
+                    <p class="text-muted">
+                        Kondisi dimana kurva lingkaran bersinggungan langsung dengan sumbu horizontal (Sumbu X).
+                    </p>
+                    
+                    <div class="visual-card">
+                        <div class="visual-img">
+                            <svg width="200" height="150" viewBox="0 0 200 150">
+                                <defs>
+                                    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#222" stroke-width="1"/>
+                                    </pattern>
+                                </defs>
+                                <rect width="100%" height="100%" fill="url(#grid)" />
+                                <line x1="0" y1="120" x2="200" y2="120" stroke="#888" stroke-width="2" />
+                                <text x="180" y="115" fill="#888" font-size="12">Sumbu X</text>
+                                <circle cx="100" cy="70" r="50" fill="none" stroke="#4ade80" stroke-width="2" />
+                                <circle cx="100" cy="70" r="3" fill="#f87171" />
+                                <line x1="100" y1="70" x2="100" y2="120" stroke="#f87171" stroke-width="2" stroke-dasharray="4" />
+                                <text x="105" y="70" fill="white" font-size="12">Pusat (a, b)</text>
+                                <text x="105" y="100" fill="#f87171" font-size="12">r</text>
+                            </svg>
+                        </div>
+                        <div class="visual-text">
+                            <p class="font-bold text-white mb-2">Analisis Grafik:</p>
+                            <p class="text-sm text-muted mb-4">
+                                Karena menyinggung sumbu X, maka jarak vertikal dari pusat ke sumbu X setara dengan nilai ordinat (b).
+                            </p>
+                            <div class="tips-box border-white/10">
+                                <p class="text-green-400 font-bold text-sm">KETENTUAN:</p>
+                                <p class="text-white text-sm">Jari-jari (r) adalah nilai positif dari b.</p>
+                                <p class="text-xs text-gray-500 mt-1">r = nilai positif b</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bagian 3 (Sumbu Y) -->
+                <div class="space-y-4 elemen-animasi">
+                    <h3 class="judul-bab border-blue-500">3. Lingkaran Menyinggung Sumbu Y</h3>
+                    <p class="text-muted">
+                        Kondisi dimana kurva lingkaran bersinggungan langsung dengan sumbu vertikal (Sumbu Y).
+                    </p>
+                    
+                    <div class="visual-card">
+                         <div class="visual-img">
+                            <svg width="200" height="150" viewBox="0 0 200 150">
+                                <rect width="100%" height="100%" fill="url(#grid)" />
+                                <line x1="40" y1="0" x2="40" y2="150" stroke="#888" stroke-width="2" />
+                                <text x="45" y="20" fill="#888" font-size="12">Sumbu Y</text>
+                                <circle cx="90" cy="75" r="50" fill="none" stroke="#60a5fa" stroke-width="2" />
+                                <circle cx="90" cy="75" r="3" fill="#f87171" />
+                                <line x1="90" y1="75" x2="40" y2="75" stroke="#f87171" stroke-width="2" stroke-dasharray="4" />
+                                <text x="95" y="75" fill="white" font-size="12">Pusat (a, b)</text>
+                                <text x="50" y="70" fill="#f87171" font-size="12">r</text>
+                            </svg>
+                        </div>
+                        <div class="visual-text">
+                            <p class="font-bold text-white mb-2">Analisis Grafik:</p>
+                            <p class="text-sm text-muted mb-4">
+                                Karena menyinggung sumbu Y, maka jarak horizontal dari pusat ke sumbu Y setara dengan nilai absis (a).
+                            </p>
+                            <div class="tips-box border-white/10">
+                                <p class="text-blue-400 font-bold text-sm">KETENTUAN:</p>
+                                <p class="text-white text-sm">Jari-jari (r) adalah nilai positif dari a.</p>
+                                <p class="text-xs text-gray-500 mt-1">r = nilai positif a</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center elemen-animasi">
+                <button onclick="pindahHalaman('soal')" class="px-8 py-3 bg-white text-black font-bold rounded-lg hover:bg-gray-200 transition shadow-lg">
+                    Lihat Latihan Soal
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= HALAMAN SOAL ================= -->
+        <div id="soal" class="halaman">
+            <div class="mb-8 border-b border-border pb-6 elemen-animasi">
+                <h2 class="text-3xl font-bold text-white mb-2">Latihan Soal</h2>
+                <p class="text-muted">Pelajari contoh soal di bawah ini, lalu kerjakan tantangan hariannya.</p>
+            </div>
+
+            <!-- BAGIAN 1: CONTOH PENGERJAAN (STATIS) -->
+            <div class="mb-12">
+                <h3 class="elemen-animasi text-xl font-bold text-white mb-6 flex items-center">
+                    <span class="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center text-sm mr-3">1</span>
+                    Contoh Pengerjaan (Pedoman)
+                </h3>
+                
+                <div class="soal-card border-l-4 border-l-white elemen-animasi">
+                    <div class="badge-soal text-gray-300 bg-gray-800">Contoh Kasus: Menyinggung Sumbu X</div>
+                    
+                    <div class="flex flex-col md:flex-row gap-6">
+                         <div class="soal-img">
+                             <svg width="150" height="120" viewBox="0 0 150 120">
+                                <rect width="100%" height="100%" fill="url(#grid)" />
+                                <line x1="10" y1="100" x2="140" y2="100" stroke="#666" stroke-width="2" />
+                                <line x1="20" y1="10" x2="20" y2="110" stroke="#666" stroke-width="2" />
+                                <circle cx="80" cy="50" r="40" fill="none" stroke="#4ade80" stroke-width="2" />
+                                <circle cx="80" cy="50" r="3" fill="#f87171" />
+                                <line x1="80" y1="50" x2="80" y2="90" stroke="#f87171" stroke-width="1" stroke-dasharray="3" />
+                                <text x="85" y="45" fill="white" font-size="10">(3, 4)</text>
+                                <text x="85" y="80" fill="#f87171" font-size="9">r=4</text>
+                            </svg>
+                        </div>
+                        <div class="w-full md:w-2/3">
+                            <p class="text-white font-medium mb-4 text-lg">Tentukan persamaan lingkaran yang berpusat di (3, 4) dan menyinggung sumbu X.</p>
+                            <div class="bg-card p-4 rounded-lg border border-border">
+                                <p class="text-white font-bold mb-2">Langkah Penyelesaian:</p>
+                                <ul class="list-disc pl-4 space-y-1 text-sm text-gray-300">
+                                    <li>Identifikasi Pusat: a=3, b=4.</li>
+                                    <li>Karena menyinggung Sumbu X, jari-jari (r) = nilai b = 4.</li>
+                                    <li>Hitung kuadrat jari-jari: r² = 16.</li>
+                                    <li>Masukkan ke rumus: <b>(x - 3)² + (y - 4)² = 16</b>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BAGIAN 2: TANTANGAN HARIAN (ACAK) -->
+            <div>
+                <h3 class="elemen-animasi text-xl font-bold text-white mb-2 flex items-center">
+                    <span class="w-8 h-8 rounded-full bg-green-500 text-black flex items-center justify-center text-sm mr-3">2</span>
+                    Latihan Soal
+                </h3>
+                <p class="elemen-animasi text-muted text-sm mb-6 ml-11">Cobalah selesaikan Soal berikut. <br> Soal ini akan berubah setiap kali Anda memuat ulang halaman.</p>
+                
+                <!-- Container Soal Acak -->
+                <div id="wadah-soal-acak" class="elemen-animasi">
+                    
+                    <!-- Soal Pool 1 (DEFAULT MUNCUL) -->
+                    <div class="soal-acak">
+                        <div class="soal-card border-green-500/30">
+                            <div class="badge-soal text-green-300 bg-green-900">Kasus: Menyinggung Sumbu X (Kuadran II)</div>
+                            <div class="flex flex-col md:flex-row gap-6">
+                                <div class="soal-img">
+                                     <svg width="150" height="120" viewBox="0 0 150 120">
+                                        <rect width="100%" height="100%" fill="url(#grid)" />
+                                        <line x1="10" y1="100" x2="140" y2="100" stroke="#666" stroke-width="2" />
+                                        <line x1="120" y1="10" x2="120" y2="110" stroke="#666" stroke-width="2" />
+                                        <circle cx="80" cy="50" r="40" fill="none" stroke="#4ade80" stroke-width="2" />
+                                        <circle cx="80" cy="50" r="3" fill="#f87171" />
+                                        <line x1="80" y1="50" x2="80" y2="90" stroke="#f87171" stroke-width="1" stroke-dasharray="3" />
+                                        <text x="70" y="45" fill="white" font-size="10">(-2, 5)</text>
+                                        <text x="85" y="80" fill="#f87171" font-size="9">r=5</text>
+                                    </svg>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <p class="text-white font-medium mb-4 text-lg">Tentukan persamaan lingkaran dengan pusat (-2, 5) dan menyinggung sumbu X.</p>
+                                    
+                                    <button onclick="bukaJawaban(this)" data-warna="green" class="px-5 py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition mb-4 text-sm">
+                                        Lihat Pembahasan
+                                    </button>
+
+                                    <div class="jawaban hidden mt-2 bg-green-900/20 p-4 rounded-lg border border-green-500/30">
+                                        <p class="text-green-400 font-bold mb-2">Jawaban:</p>
+                                        <ul class="list-disc pl-4 space-y-1 text-sm text-gray-300">
+                                            <li>Pusat (-2, 5). Menyinggung Sumbu X.</li>
+                                            <li>Jari-jari (r) adalah 5.</li>
+                                            <li>r² = 25.</li>
+                                            <li>Persamaan: <b>(x + 2)² + (y - 5)² = 25</b>.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soal Pool 2 -->
+                    <div class="soal-acak hidden">
+                        <div class="soal-card border-blue-500/30">
+                            <div class="badge-soal text-blue-300 bg-blue-900">Kasus: Menyinggung Sumbu Y</div>
+                            <div class="flex flex-col md:flex-row gap-6">
+                                <div class="soal-img">
+                                     <svg width="150" height="120" viewBox="0 0 150 120">
+                                        <rect width="100%" height="100%" fill="url(#grid)" />
+                                        <line x1="10" y1="100" x2="140" y2="100" stroke="#666" stroke-width="2" />
+                                        <line x1="30" y1="10" x2="30" y2="110" stroke="#666" stroke-width="2" />
+                                        <circle cx="80" cy="50" r="40" fill="none" stroke="#60a5fa" stroke-width="2" />
+                                        <circle cx="80" cy="50" r="3" fill="#f87171" />
+                                        <line x1="80" y1="50" x2="40" y2="50" stroke="#f87171" stroke-width="1" stroke-dasharray="3" />
+                                        <text x="85" y="45" fill="white" font-size="10">(3, 4)</text>
+                                        <text x="45" y="65" fill="#f87171" font-size="9">r=3</text>
+                                    </svg>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <p class="text-white font-medium mb-4 text-lg">Tentukan persamaan lingkaran dengan pusat (3, 4) yang menyinggung sumbu Y.</p>
+                                    
+                                     <button onclick="bukaJawaban(this)" data-warna="blue" class="px-5 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition mb-4 text-sm">
+                                        Lihat Pembahasan
+                                    </button>
+
+                                    <div class="jawaban hidden mt-2 bg-blue-900/20 p-4 rounded-lg border border-blue-500/30">
+                                        <p class="text-blue-400 font-bold mb-2">Jawaban:</p>
+                                        <ul class="list-disc pl-4 space-y-1 text-sm text-gray-300">
+                                            <li>Pusat (3, 4). Menyinggung Sumbu Y.</li>
+                                            <li>Jari-jari (r) adalah 3.</li>
+                                            <li>r² = 9.</li>
+                                            <li>Persamaan: <b>(x - 3)² + (y - 4)² = 9</b>.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- Penutup Soal Pool 2 yang tadi hilang -->
+
+                    <!-- Soal Pool 3 -->
+                    <div class="soal-acak hidden">
+                        <div class="soal-card border-blue-500/30">
+                            <div class="badge-soal text-blue-300 bg-blue-900">Kasus: Menyinggung Sumbu Y (Negatif)</div>
+                            <div class="flex flex-col md:flex-row gap-6">
+                                <div class="soal-img">
+                                     <svg width="150" height="120" viewBox="0 0 150 120">
+                                        <rect width="100%" height="100%" fill="url(#grid)" />
+                                        <line x1="10" y1="100" x2="140" y2="100" stroke="#666" stroke-width="2" />
+                                        <line x1="120" y1="10" x2="120" y2="110" stroke="#666" stroke-width="2" />
+                                        <circle cx="70" cy="80" r="40" fill="none" stroke="#60a5fa" stroke-width="2" />
+                                        <circle cx="70" cy="80" r="3" fill="#f87171" />
+                                        <line x1="70" y1="80" x2="110" y2="80" stroke="#f87171" stroke-width="1" stroke-dasharray="3" />
+                                        <text x="50" y="75" fill="white" font-size="10">(-5, 2)</text>
+                                        <text x="80" y="95" fill="#f87171" font-size="9">r=5</text>
+                                    </svg>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <p class="text-white font-medium mb-4 text-lg">Tentukan persamaan lingkaran dengan pusat (-5, 2) yang menyinggung sumbu Y.</p>
+                                    
+                                     <button onclick="bukaJawaban(this)" data-warna="blue" class="px-5 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition mb-4 text-sm">
+                                        Lihat Pembahasan
+                                    </button>
+
+                                    <div class="jawaban hidden mt-2 bg-blue-900/20 p-4 rounded-lg border border-blue-500/30">
+                                        <p class="text-blue-400 font-bold mb-2">Jawaban:</p>
+                                        <ul class="list-disc pl-4 space-y-1 text-sm text-gray-300">
+                                            <li>Pusat (-5, 2). Menyinggung Sumbu Y.</li>
+                                            <li>Jari-jari (r) adalah nilai positif dari -5, yaitu 5.</li>
+                                            <li>r² = 25.</li>
+                                            <li>Persamaan: <b>(x + 5)² + (y - 2)² = 25</b>.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soal Pool 4 -->
+                    <div class="soal-acak hidden">
+                        <div class="soal-card border-purple-500/30">
+                            <div class="badge-soal text-purple-300 bg-purple-900">Kasus: Menyinggung Kedua Sumbu</div>
+                            <div class="flex flex-col md:flex-row gap-6">
+                                <div class="soal-img">
+                                     <svg width="150" height="120" viewBox="0 0 150 120">
+                                        <rect width="100%" height="100%" fill="url(#grid)" />
+                                        <line x1="10" y1="110" x2="140" y2="110" stroke="#666" stroke-width="2" />
+                                        <line x1="20" y1="10" x2="20" y2="110" stroke="#666" stroke-width="2" />
+                                        <circle cx="70" cy="60" r="40" fill="none" stroke="#c084fc" stroke-width="2" />
+                                        <circle cx="70" cy="60" r="3" fill="#f87171" />
+                                        <line x1="70" y1="60" x2="70" y2="100" stroke="#f87171" stroke-width="1" stroke-dasharray="3" />
+                                        <line x1="70" y1="60" x2="30" y2="60" stroke="#f87171" stroke-width="1" stroke-dasharray="3" />
+                                        <text x="75" y="55" fill="white" font-size="10">(5, 5)</text>
+                                    </svg>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <p class="text-white font-medium mb-4 text-lg">Tentukan persamaan lingkaran yang menyinggung kedua sumbu di Kuadran I dengan jari-jari 5.</p>
+                                    
+                                     <button onclick="bukaJawaban(this)" data-warna="purple" class="px-5 py-2 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-700 transition mb-4 text-sm">
+                                        Lihat Pembahasan
+                                    </button>
+
+                                    <div class="jawaban hidden mt-2 bg-purple-900/20 p-4 rounded-lg border border-purple-500/30">
+                                        <p class="text-purple-400 font-bold mb-2">Jawaban:</p>
+                                        <ul class="list-disc pl-4 space-y-1 text-sm text-gray-300">
+                                            <li>Kuadran I = Pusat positif (5, 5).</li>
+                                            <li>Jari-jari = 5. Kuadratnya = 25.</li>
+                                            <li>Persamaan: <b>(x - 5)² + (y - 5)² = 25</b>.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soal Pool 5 -->
+                    <div class="soal-acak hidden">
+                        <div class="soal-card border-purple-500/30">
+                            <div class="badge-soal text-purple-300 bg-purple-900">Kasus: Menyinggung Kedua Sumbu (Kuadran III)</div>
+                            <div class="flex flex-col md:flex-row gap-6">
+                                <div class="soal-img">
+                                     <svg width="150" height="120" viewBox="0 0 150 120">
+                                        <rect width="100%" height="100%" fill="url(#grid)" />
+                                        <line x1="10" y1="10" x2="140" y2="10" stroke="#666" stroke-width="2" />
+                                        <line x1="130" y1="10" x2="130" y2="110" stroke="#666" stroke-width="2" />
+                                        <circle cx="80" cy="60" r="40" fill="none" stroke="#c084fc" stroke-width="2" />
+                                        <circle cx="80" cy="60" r="3" fill="#f87171" />
+                                        <line x1="80" y1="60" x2="80" y2="10" stroke="#f87171" stroke-width="1" stroke-dasharray="3" />
+                                        <line x1="80" y1="60" x2="130" y2="60" stroke="#f87171" stroke-width="1" stroke-dasharray="3" />
+                                        <text x="75" y="65" fill="white" font-size="10">(-4, -4)</text>
+                                    </svg>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <p class="text-white font-medium mb-4 text-lg">Tentukan persamaan lingkaran yang menyinggung kedua sumbu di Kuadran III dengan jari-jari 4.</p>
+                                    
+                                     <button onclick="bukaJawaban(this)" data-warna="purple" class="px-5 py-2 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-700 transition mb-4 text-sm">
+                                        Lihat Pembahasan
+                                    </button>
+
+                                    <div class="jawaban hidden mt-2 bg-purple-900/20 p-4 rounded-lg border border-purple-500/30">
+                                        <p class="text-purple-400 font-bold mb-2">Jawaban:</p>
+                                        <ul class="list-disc pl-4 space-y-1 text-sm text-gray-300">
+                                            <li>Kuadran III = Pusat negatif semua (-4, -4).</li>
+                                            <li>Jari-jari (r) adalah nilai positif dari -4, yaitu 4.</li>
+                                            <li>r² = 16.</li>
+                                            <li>Persamaan: <b>(x + 4)² + (y + 4)² = 16</b>.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- Penutup Soal Pool 5 yang tadi hilang -->
+
+                    <!-- Soal Pool 6 -->
+                    <div class="soal-acak hidden">
+                        <div class="soal-card border-green-500/30">
+                            <div class="badge-soal text-green-300 bg-green-900">Kasus: Menyinggung Sumbu X (Kuadran IV)</div>
+                            <div class="flex flex-col md:flex-row gap-6">
+                                <div class="soal-img">
+                                     <svg width="150" height="120" viewBox="0 0 150 120">
+                                        <rect width="100%" height="100%" fill="url(#grid)" />
+                                        <!-- Axis Top & Left for Q4 look -->
+                                        <line x1="10" y1="20" x2="140" y2="20" stroke="#666" stroke-width="2" />
+                                        <line x1="20" y1="10" x2="20" y2="110" stroke="#666" stroke-width="2" />
+                                        <!-- Circle Center (4, -3) -->
+                                        <circle cx="80" cy="70" r="50" fill="none" stroke="#4ade80" stroke-width="2" />
+                                        <circle cx="80" cy="70" r="3" fill="#f87171" />
+                                        <!-- Radius line up to X axis -->
+                                        <line x1="80" y1="70" x2="80" y2="20" stroke="#f87171" stroke-width="1" stroke-dasharray="3" />
+                                        <text x="85" y="75" fill="white" font-size="10">(4, -3)</text>
+                                        <text x="85" y="45" fill="#f87171" font-size="9">r=3</text>
+                                    </svg>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <p class="text-white font-medium mb-4 text-lg">Tentukan persamaan lingkaran dengan pusat (4, -3) dan menyinggung sumbu X.</p>
+                                    
+                                     <button onclick="bukaJawaban(this)" data-warna="green" class="px-5 py-2 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition mb-4 text-sm">
+                                        Lihat Pembahasan
+                                    </button>
+
+                                    <div class="jawaban hidden mt-2 bg-green-900/20 p-4 rounded-lg border border-green-500/30">
+                                        <p class="text-green-400 font-bold mb-2">Jawaban:</p>
+                                        <ul class="list-disc pl-4 space-y-1 text-sm text-gray-300">
+                                            <li>Pusat (4, -3). Menyinggung Sumbu X.</li>
+                                            <li>Jari-jari (r) adalah nilai positif dari -3, yaitu 3.</li>
+                                            <li>r² = 9.</li>
+                                            <li>Persamaan: <b>(x - 4)² + (y + 3)² = 9</b>.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- Penutup Soal Pool 6 yang tadi hilang -->
+
+                    <!-- Soal Pool 7 -->
+                    <div class="soal-acak hidden">
+                        <div class="soal-card border-purple-500/30">
+                            <div class="badge-soal text-purple-300 bg-purple-900">Kasus: Menyinggung Kedua Sumbu (Kuadran II)</div>
+                            <div class="flex flex-col md:flex-row gap-6">
+                                <div class="soal-img">
+                                     <svg width="150" height="120" viewBox="0 0 150 120">
+                                        <rect width="100%" height="100%" fill="url(#grid)" />
+                                        <!-- Axis Bottom & Right for Q2 look -->
+                                        <line x1="10" y1="110" x2="140" y2="110" stroke="#666" stroke-width="2" />
+                                        <line x1="130" y1="10" x2="130" y2="110" stroke="#666" stroke-width="2" />
+                                        <!-- Circle Center (-3, 3) -->
+                                        <circle cx="80" cy="60" r="50" fill="none" stroke="#c084fc" stroke-width="2" />
+                                        <circle cx="80" cy="60" r="3" fill="#f87171" />
+                                        <!-- Radius lines -->
+                                        <line x1="80" y1="60" x2="80" y2="110" stroke="#f87171" stroke-width="1" stroke-dasharray="3" />
+                                        <line x1="80" y1="60" x2="130" y2="60" stroke="#f87171" stroke-width="1" stroke-dasharray="3" />
+                                        <text x="65" y="55" fill="white" font-size="10">(-3, 3)</text>
+                                    </svg>
+                                </div>
+                                <div class="w-full md:w-2/3">
+                                    <p class="text-white font-medium mb-4 text-lg">Tentukan persamaan lingkaran yang menyinggung kedua sumbu di Kuadran II dengan jari-jari 3.</p>
+                                    
+                                     <button onclick="bukaJawaban(this)" data-warna="purple" class="px-5 py-2 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-700 transition mb-4 text-sm">
+                                        Lihat Pembahasan
+                                    </button>
+
+                                    <div class="jawaban hidden mt-2 bg-purple-900/20 p-4 rounded-lg border border-purple-500/30">
+                                        <p class="text-purple-400 font-bold mb-2">Jawaban:</p>
+                                        <ul class="list-disc pl-4 space-y-1 text-sm text-gray-300">
+                                            <li>Kuadran II = x negatif (-3), y positif (3). Pusat (-3, 3).</li>
+                                            <li>Jari-jari = 3. Kuadratnya = 9.</li>
+                                            <li>Persamaan: <b>(x + 3)² + (y - 3)² = 9</b>.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- Penutup Soal Pool 7 yang tadi hilang -->
+
+                </div>
+
+            </div>
+            
+            <div class="text-center mt-12">
+                <button onclick="pindahHalaman('home')" class="text-muted hover:text-white transition text-sm">Kembali ke Beranda</button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="border-t border-border py-8 text-center text-xs text-muted">
+        Matematika - Kelompok 5 <br> &copy; 2026
+    </footer>
+
+    <!-- Script JS -->
+    <script src="script.js"></script>
+
+</body>
+</html>

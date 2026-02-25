@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { dark: '#020617', primary: '#6366f1', secondary: '#a855f7' },
+                    fontFamily: { heading: ['Outfit'], body: ['Inter'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark text-slate-200 font-body">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass border-b border-white/10">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-heading font-bold text-white">Nadir<span class="text-primary">.</span></a>
+            <ul class="hidden md:flex space-x-8">
+                <li><a href="index.html" class="nav-link hover:text-white transition">Home</a></li>
+                <li><a href="about.html" class="nav-link text-primary font-bold">About</a></li>
+                <li><a href="projects.html" class="nav-link hover:text-white transition">Projects</a></li>
+                <li><a href="contact.html" class="nav-link hover:text-white transition">Contact</a></li>
+            </ul>
+            <button id="menu-btn" class="md:hidden text-white text-2xl"><i class="fas fa-bars"></i></button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-dark/95 backdrop-blur-xl border-t border-white/10 absolute w-full">
+            <ul class="flex flex-col p-6 space-y-4">
+                <li><a href="index.html" class="block hover:text-primary">Home</a></li>
+                <li><a href="about.html" class="block text-primary">About</a></li>
+                <li><a href="projects.html" class="block hover:text-primary">Projects</a></li>
+                <li><a href="contact.html" class="block hover:text-primary">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-20 container mx-auto px-6">
+        <div class="text-center mb-16 animate-fade-up">
+            <h2 class="text-4xl font-heading font-bold text-white mb-4">About <span class="text-primary">Me</span></h2>
+            <div class="w-16 h-1 bg-primary mx-auto rounded"></div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <!-- Text Content -->
+            <div class="space-y-6 text-lg leading-relaxed animate-fade-up delay-100">
+                <p>Hello! My name is <strong class="text-white">Muhammad Nadir</strong>. I am a student with great enthusiasm for programming. Currently, I am focused on learning various languages and technologies, from web fundamentals like HTML, CSS, and JavaScript, to game scripting languages like Luau.</p>
+                <p>I thoroughly enjoy the process of turning ideas into something interactive and functional. Beyond the digital world, I also have a hobby in the technical field, such as repairing hardware. I believe that learning is a lifelong process.</p>
+                
+                <!-- REVISI: Statistik ditambahkan kembali -->
+                <div class="flex gap-4 pt-4">
+                    <div class="flex flex-col">
+                        <span class="text-3xl font-bold text-white">2+</span>
+                        <span class="text-sm text-slate-400">Years Coding</span>
+                    </div>
+                    <!-- Garis pemisah -->
+                    <div class="w-px h-12 bg-slate-700 mx-4"></div>
+                    <div class="flex flex-col">
+                        <span class="text-3xl font-bold text-white">10+</span>
+                        <span class="text-sm text-slate-400">Projects</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Grid -->
+            <div class="grid grid-cols-2 gap-4 animate-fade-up delay-200">
+                <div class="glass-card p-6 rounded-xl text-center group hover:-translate-y-2 transition-transform duration-300">
+                    <i class="fab fa-html5 text-4xl text-orange-500 mb-3"></i>
+                    <h3 class="font-bold text-white">HTML</h3>
+                    <p class="text-xs text-slate-400">Semantic Structure</p>
+                </div>
+                <div class="glass-card p-6 rounded-xl text-center group hover:-translate-y-2 transition-transform duration-300">
+                    <i class="fab fa-css3-alt text-4xl text-blue-500 mb-3"></i>
+                    <h3 class="font-bold text-white">CSS</h3>
+                    <p class="text-xs text-slate-400">Responsive Design</p>
+                </div>
+                <div class="glass-card p-6 rounded-xl text-center group hover:-translate-y-2 transition-transform duration-300">
+                    <i class="fab fa-js text-4xl text-yellow-400 mb-3"></i>
+                    <h3 class="font-bold text-white">JavaScript</h3>
+                    <p class="text-xs text-slate-400">Interactivity</p>
+                </div>
+                <div class="glass-card p-6 rounded-xl text-center group hover:-translate-y-2 transition-transform duration-300">
+                    <i class="fas fa-gamepad text-4xl text-green-500 mb-3"></i>
+                    <h3 class="font-bold text-white">Luau</h3>
+                    <p class="text-xs text-slate-400">Game Scripting</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="index.html" class="text-slate-400 hover:text-white transition"><i class="fas fa-arrow-left mr-2"></i> Back to Home</a>
+        </div>
+    </main>
+
+    <footer class="py-6 text-center text-slate-500 border-t border-white/5 text-sm">
+        &copy; 2025 Muhammad Nadir. All Rights Reserved.
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

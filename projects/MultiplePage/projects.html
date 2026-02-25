@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { dark: '#020617', primary: '#6366f1', secondary: '#a855f7' },
+                    fontFamily: { heading: ['Outfit'], body: ['Inter'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark text-slate-200 font-body">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass border-b border-white/10">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-heading font-bold text-white">Nadir<span class="text-primary">.</span></a>
+            <ul class="hidden md:flex space-x-8">
+                <li><a href="index.html" class="nav-link hover:text-white transition">Home</a></li>
+                <li><a href="about.html" class="nav-link hover:text-white transition">About</a></li>
+                <li><a href="projects.html" class="nav-link text-primary font-bold">Projects</a></li>
+                <li><a href="contact.html" class="nav-link hover:text-white transition">Contact</a></li>
+            </ul>
+            <button id="menu-btn" class="md:hidden text-white text-2xl"><i class="fas fa-bars"></i></button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-dark/95 backdrop-blur-xl border-t border-white/10 absolute w-full">
+            <ul class="flex flex-col p-6 space-y-4">
+                <li><a href="index.html" class="block hover:text-primary">Home</a></li>
+                <li><a href="about.html" class="block hover:text-primary">About</a></li>
+                <li><a href="projects.html" class="block text-primary">Projects</a></li>
+                <li><a href="contact.html" class="block hover:text-primary">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Projects Grid -->
+    <main class="pt-32 pb-20 container mx-auto px-6">
+        <div class="text-center mb-16 animate-fade-up">
+            <h2 class="text-4xl font-heading font-bold text-white mb-4">My <span class="text-primary">Projects</span></h2>
+            <p class="text-slate-400">A collection of things I've built and learned from.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Project 1 (Windows 11) -->
+            <div class="glass-card rounded-2xl overflow-hidden cursor-pointer group project-card animate-fade-up delay-100"
+                 data-img-src="Image/Windows11.png"
+                 data-title="Windows 11 Installation"
+                 data-desc="This project provides a comprehensive, beginner-friendly tutorial on installing Windows 11 on VirtualBox."
+                 data-video-url="https://www.youtube.com/watch?v=NcnWHG8Gffc">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="Image/Windows11.png" alt="Win11" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <span class="text-white border border-white px-4 py-2 rounded-full text-sm">View Details</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">Windows 11 Setup</h3>
+                    <p class="text-slate-400 text-sm">Virtual Machine Configuration</p>
+                </div>
+            </div>
+
+            <!-- Project 2 (Roblox) -->
+            <!-- REVISI: Deskripsi diperbarui, lengkap tapi rapi -->
+            <div class="glass-card rounded-2xl overflow-hidden cursor-pointer group project-card animate-fade-up delay-200"
+                 data-img-src="Image/DigScript.png"
+                 data-title="Roblox Scripting"
+                 data-desc="I started coding in mid-2022 with Lua. I developed 'Skedz Hub', a Roblox exploit script that gained significant traction, amassing over 50,000 users globally. This project was a pivotal moment, marking my first success in software monetization and deepening my understanding of game logic."
+                 data-video-url="">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="Image/DigScript.png" alt="Roblox" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <span class="text-white border border-white px-4 py-2 rounded-full text-sm">View Details</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">Roblox Scripting</h3>
+                    <p class="text-slate-400 text-sm">Luau Programming & Game Dev</p>
+                </div>
+            </div>
+
+            <!-- Project 3 (Calculator) -->
+            <div class="glass-card rounded-2xl overflow-hidden cursor-pointer group project-card animate-fade-up delay-300"
+                 data-img-src="Image/CalculatorB.png"
+                 data-title="Calculator App"
+                 data-desc="A sleek and functional calculator app built from scratch using HTML, CSS, and vanilla JavaScript."
+                 data-video-url="">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="Image/CalculatorB.png" alt="Calc" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <span class="text-white border border-white px-4 py-2 rounded-full text-sm">View Details</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-white mb-2">JS Calculator</h3>
+                    <p class="text-slate-400 text-sm">Web Logic & DOM Manipulation</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="index.html" class="text-slate-400 hover:text-white transition"><i class="fas fa-arrow-left mr-2"></i> Back to Home</a>
+        </div>
+    </main>
+
+    <!-- Modal (Tersembunyi by default) -->
+    <div id="project-modal" class="fixed inset-0 z-[100] flex items-center justify-center px-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" id="modal-bg"></div>
+        <div class="relative bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl transform scale-95 transition-transform duration-300" id="modal-content">
+            <button id="modal-close-btn" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl"><i class="fas fa-times"></i></button>
+            
+            <img id="modal-img" src="" class="w-full h-56 object-cover rounded-lg mb-4 bg-slate-800">
+            <h3 id="modal-title" class="text-2xl font-bold text-white mb-2"></h3>
+            <p id="modal-desc" class="text-slate-300 mb-6 text-sm leading-relaxed"></p>
+            
+            <a id="modal-video-btn" href="#" target="_blank" class="hidden w-full bg-red-600 hover:bg-red-700 text-white text-center py-3 rounded-lg font-bold transition">
+                <i class="fab fa-youtube mr-2"></i> Watch Tutorial
+            </a>
+        </div>
+    </div>
+
+    <footer class="py-6 text-center text-slate-500 border-t border-white/5 text-sm">
+        &copy; 2025 Muhammad Nadir. All Rights Reserved.
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

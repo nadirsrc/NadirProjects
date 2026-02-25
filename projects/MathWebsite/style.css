@@ -1,0 +1,221 @@
+body {
+    background-color: #121212;
+    color: #e5e5e5;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.elemen-animasi {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.elemen-animasi.muncul {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+
+.halaman {
+    display: none;
+}
+
+.halaman.active {
+    display: block;
+}
+
+.glass-nav {
+    background: rgba(18, 18, 18, 0.85);
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+}
+
+.nav-link {
+    position: relative;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 15px;
+    left: 0;
+    background-color: white;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: white;
+}
+
+.menu-card, .soal-card, .visual-card {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.menu-card:hover, .soal-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px -10px rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+button {
+    transition: all 0.2s ease;
+}
+
+.menu-card {
+    padding: 1.5rem;
+    background-color: #1E1E1E;
+    border-radius: 1rem;
+    border: 1px solid #333333;
+    text-align: left;
+}
+
+.icon-wrapper {
+    height: 6rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #121212;
+    border-radius: 0.75rem;
+    border: 1px solid #333333;
+    transition: transform 0.5s ease;
+}
+
+.menu-card:hover .icon-wrapper {
+    transform: scale(1.05) rotate(3deg);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.judul-bab {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    padding-left: 1rem;
+    border-left-width: 4px;
+}
+
+.rumus-box {
+    background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.visual-card {
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .visual-card {
+        flex-direction: row;
+    }
+}
+
+.visual-img {
+    width: 100%;
+    background-color: #0f0f0f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border-bottom: 1px solid #333;
+}
+
+@media (min-width: 768px) {
+    .visual-img {
+        width: 50%;
+        border-bottom: none;
+        border-right: 1px solid #333;
+    }
+}
+
+.visual-text {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .visual-text {
+        width: 50%;
+    }
+}
+
+.tips-box {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.soal-card {
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    padding: 1.5rem;
+    border-radius: 1rem;
+}
+
+.badge-soal {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.35rem 0.75rem;
+    border-radius: 99px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+}
+
+.soal-img {
+    width: 100%;
+    background-color: #0f0f0f;
+    border-radius: 0.75rem;
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .soal-img {
+        width: 33.333333%;
+    }
+}
+
+.pembahasan {
+    background-color: #151515;
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+    font-size: 0.9rem;
+    color: #d1d5db;
+    border-left-width: 3px;
+    margin-top: 1rem;
+}
