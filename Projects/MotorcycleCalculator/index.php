@@ -135,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         <div class="form-actions">
                             <button type="submit" class="btn-main">Hitung Sekarang</button>
-                            <button type="reset" class="btn-text">Reset</button>
+                            <button type="button" class="btn-text" onclick="window.location.href='index.php'">Reset</button>
                         </div>
                     </form>
                 </div>

@@ -230,7 +230,15 @@ function showProjectPopup(el, url) {
     el.appendChild(popup);
     activePopup = { el, popup };
 
-    requestAnimationFrame(() => popup.classList.add('show'));
+    // Check if popup would overflow below the viewport
+    requestAnimationFrame(() => {
+        const rect = el.getBoundingClientRect();
+        const spaceBelow = window.innerHeight - rect.bottom;
+        if (spaceBelow < 80) {
+            popup.classList.add('popup-above');
+        }
+        popup.classList.add('show');
+    });
 }
 
 function copyLink(url, btn) {
