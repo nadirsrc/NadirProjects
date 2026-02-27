@@ -1,26 +1,40 @@
 <?php
-$hasil = null;
-$harga_motor = '';
-$dp_persen = '';
-$tenor_tahun = '';
+// ============================================
+// BACKEND LOGIC — Proses perhitungan angsuran motor
+// File ini memproses data dari form simulasi kredit
+// menggunakan metode POST, lalu menghitung DP, bunga,
+// total pinjaman, dan angsuran per bulan.
+// ============================================
 
+// Inisialisasi variabel default (kosong) supaya form tidak error saat pertama kali dibuka
+$hasil = null;        // Menyimpan hasil perhitungan (null = belum dihitung)
+$harga_motor = '';    // Harga motor yang diinput user
+$dp_persen = '';      // Persentase uang muka (DP)
+$tenor_tahun = '';    // Lama cicilan dalam tahun
+
+// Cek apakah form sudah disubmit (method POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Ambil data dari form yang dikirim user melalui POST
     $harga_motor = isset($_POST['harga_motor']) ? $_POST['harga_motor'] : 0;
     $dp_persen   = isset($_POST['dp_persen']) ? $_POST['dp_persen'] : 0;
     $tenor_tahun = isset($_POST['tenor_tahun']) ? $_POST['tenor_tahun'] : 0;
 
+    // Konversi input string ke angka (hapus titik pemisah ribuan)
     $harga_motor_num = floatval(str_replace(['.', ','], ['', '.'], $harga_motor));
-    $dp_persen_num   = floatval($dp_persen);
-    $tenor_tahun_num = intval($tenor_tahun);
+    $dp_persen_num   = floatval($dp_persen);   // Konversi DP ke float
+    $tenor_tahun_num = intval($tenor_tahun);    // Konversi tenor ke integer
 
+    // Validasi: harga harus > 0, DP antara 0-99%, tenor harus > 0
     if ($harga_motor_num > 0 && $dp_persen_num >= 0 && $dp_persen_num < 100 && $tenor_tahun_num > 0) {
-        $bunga_persen    = 20;
-        $bunga_rp        = ($bunga_persen / 100) * $harga_motor_num;
-        $dp_rp           = ($dp_persen_num / 100) * $harga_motor_num;
-        $tenor_bulan     = $tenor_tahun_num * 12;
-        $total_pinjaman  = ($harga_motor_num + $bunga_rp) - $dp_rp;
-        $angsuran_bulan  = $total_pinjaman / $tenor_bulan;
+        // === RUMUS PERHITUNGAN KREDIT ===
+        $bunga_persen    = 20;                                        // Bunga flat 20% per tahun
+        $bunga_rp        = ($bunga_persen / 100) * $harga_motor_num;  // Hitung bunga dalam Rupiah
+        $dp_rp           = ($dp_persen_num / 100) * $harga_motor_num; // Hitung DP dalam Rupiah
+        $tenor_bulan     = $tenor_tahun_num * 12;                     // Konversi tahun ke bulan
+        $total_pinjaman  = ($harga_motor_num + $bunga_rp) - $dp_rp;   // Total yang harus dibayar (harga + bunga - DP)
+        $angsuran_bulan  = $total_pinjaman / $tenor_bulan;            // Cicilan per bulan
 
+        // Simpan semua hasil perhitungan ke array untuk ditampilkan di halaman
         $hasil = [
             'harga_motor'    => $harga_motor_num,
             'dp_persen'      => $dp_persen_num,
@@ -33,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'angsuran_bulan' => $angsuran_bulan,
         ];
     } else {
+        // Jika validasi gagal, tampilkan pesan error
         $error = "Mohon isi semua data dengan benar.";
     }
 }
@@ -43,15 +58,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MotoKredit &mdash; Simulasi Kredit Motor</title>
+    <!-- Icon library Bootstrap Icons untuk ikon-ikon di halaman -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Font: Plus Jakarta Sans untuk typography modern -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Menyisipkan file CSS secara langsung (inline) menggunakan PHP include -->
     <style><?php include 'assets/css/style.css'; ?></style>
 </head>
 <body>
 
+    <!-- ============================================ -->
+    <!-- HEADER/NAVBAR — Navigasi utama website      -->
+    <!-- Di-include dari file terpisah (modular)      -->
+    <!-- ============================================ -->
     <?php include 'includes/header.php'; ?>
 
-    <!-- HERO -->
+    <!-- ============================================ -->
+    <!-- HERO SECTION — Bagian pembuka halaman        -->
+    <!-- Menampilkan judul utama, deskripsi singkat,   -->
+    <!-- tombol CTA, dan statistik ringkas (DP, tenor, -->
+    <!-- bunga) untuk menarik perhatian pengunjung.    -->
+    <!-- ============================================ -->
     <section id="beranda" class="hero">
         <div class="container">
             <div class="hero-inner">
@@ -87,7 +114,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </section>
 
-    <!-- SIMULASI -->
+    <!-- ============================================ -->
+    <!-- SIMULASI SECTION — Form kalkulator kredit    -->
+    <!-- Berisi form input (harga motor, DP, tenor)   -->
+    <!-- dan area hasil perhitungan. Data dikirim ke  -->
+    <!-- PHP via POST, lalu hasil ditampilkan di sini -->
+    <!-- ============================================ -->
     <section id="simulasi">
         <div class="container">
             <div class="section-label">Kalkulator</div>
@@ -96,13 +128,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="sim-wrapper">
                 <div class="sim-form-side">
+                    <!-- Menampilkan pesan error jika validasi gagal -->
                     <?php if (isset($error)): ?>
                         <div class="form-error">
                             <i class="bi bi-info-circle"></i> <?= $error ?>
                         </div>
                     <?php endif; ?>
 
+                    <!-- Form simulasi kredit — mengirim data ke index.php via POST -->
+                    <!-- action="index.php#hasil" supaya halaman langsung scroll ke hasil setelah submit -->
                     <form method="POST" action="index.php#hasil">
+                        <!-- Input harga motor (format teks supaya bisa pakai titik pemisah ribuan) -->
                         <div class="field">
                             <label for="harga_motor">Harga Motor</label>
                             <div class="field-input">
@@ -113,6 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                         </div>
 
+                        <!-- Input persentase uang muka (DP) — angka 0 sampai 99 -->
                         <div class="field">
                             <label for="dp_persen">Uang Muka (DP)</label>
                             <div class="field-input">
@@ -123,6 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                         </div>
 
+                        <!-- Input tenor cicilan dalam tahun (1 sampai 10 tahun) -->
                         <div class="field">
                             <label for="tenor_tahun">Tenor Cicilan</label>
                             <div class="field-input">
@@ -133,6 +171,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                         </div>
 
+                        <!-- Tombol submit untuk menghitung, dan tombol reset untuk mengosongkan form -->
+                        <!-- Reset menggunakan redirect ke index.php (GET) supaya form benar-benar kosong -->
                         <div class="form-actions">
                             <button type="submit" class="btn-main">Hitung Sekarang</button>
                             <button type="button" class="btn-text" onclick="window.location.href='index.php'">Reset</button>
@@ -140,14 +180,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </form>
                 </div>
 
+                <!-- ============================================ -->
+                <!-- HASIL SIMULASI — Menampilkan hasil         -->
+                <!-- perhitungan jika form sudah disubmit.      -->
+                <!-- Jika belum, tampilkan placeholder kosong.  -->
+                <!-- ============================================ -->
                 <div class="sim-result-side" id="hasil">
                     <?php if ($hasil): ?>
+                    <!-- Hasil perhitungan berhasil — tampilkan kartu hasil -->
                     <div class="result-card active">
+                        <!-- Angsuran per bulan (highlight utama) -->
                         <div class="result-highlight">
                             <span class="result-label">Angsuran per bulan</span>
+                            <!-- number_format() untuk format angka ke Rupiah (titik pemisah ribuan) -->
                             <span class="result-amount">Rp <?= number_format($hasil['angsuran_bulan'], 0, ',', '.') ?></span>
                             <span class="result-tenor">selama <?= $hasil['tenor_bulan'] ?> bulan</span>
                         </div>
+                        <!-- Detail rincian: harga, DP, bunga, total pinjaman -->
                         <div class="result-details">
                             <div class="detail-row">
                                 <span>Harga Motor</span>
@@ -168,6 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
                     <?php else: ?>
+                    <!-- Belum ada hasil — tampilkan pesan kosong -->
                     <div class="result-empty">
                         <div class="result-empty-icon">
                             <i class="bi bi-arrow-left"></i>
@@ -180,7 +230,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </section>
 
-    <!-- PILIHAN MOTOR -->
+    <!-- ============================================ -->
+    <!-- KATALOG MOTOR — Menampilkan daftar motor     -->
+    <!-- populer beserta gambar, merek, kapasitas CC,  -->
+    <!-- tipe transmisi, dan harga. Gambar diambil    -->
+    <!-- dari CDN oto.com menggunakan lazy loading.   -->
+    <!-- ============================================ -->
     <section id="motor">
         <div class="container">
             <div class="section-label">Katalog</div>
@@ -281,37 +336,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </section>
 
+    <!-- ============================================ -->
+    <!-- FOOTER — Bagian bawah halaman                -->
+    <!-- Di-include dari file terpisah (modular)      -->
+    <!-- ============================================ -->
     <?php include 'includes/footer.php'; ?>
 
     <script>
-        // Format harga input
+        // ============================================
+        // JAVASCRIPT — Interaktivitas halaman
+        // ============================================
+
+        // FORMAT HARGA INPUT
+        // Menambahkan titik pemisah ribuan otomatis saat user mengetik harga motor
+        // Contoh: 25000000 → 25.000.000
         const hargaInput = document.getElementById('harga_motor');
         hargaInput.addEventListener('input', function() {
-            let v = this.value.replace(/\D/g, '');
-            this.value = v.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            let v = this.value.replace(/\D/g, '');                       // Hapus semua karakter non-angka
+            this.value = v.replace(/\B(?=(\d{3})+(?!\d))/g, '.');       // Tambahkan titik setiap 3 digit
         });
 
-        // Scroll reveal
+        // SCROLL REVEAL ANIMATION
+        // Menggunakan Intersection Observer API untuk mendeteksi elemen
+        // yang masuk ke viewport, lalu menambahkan class 'visible'
+        // supaya animasi fade-in muncul saat user scroll ke bawah
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    entry.target.classList.add('visible'); // Tambah class visible saat elemen terlihat
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.1 }); // Trigger saat 10% elemen terlihat
 
+        // Terapkan reveal animation ke elemen motor, form simulasi, dan judul section
         document.querySelectorAll('.motor-item, .sim-wrapper, .section-title').forEach(el => {
-            el.classList.add('reveal');
-            observer.observe(el);
+            el.classList.add('reveal');  // Tambah class reveal (hidden by default di CSS)
+            observer.observe(el);        // Mulai observasi elemen
         });
 
-        // Smooth scroll
+        // SMOOTH SCROLL
+        // Membuat semua link anchor (href="#...") scroll secara halus
+        // ke section tujuan, bukan langsung loncat
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
+                e.preventDefault(); // Cegah behavior default (loncat langsung)
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Scroll halus ke target
                 }
             });
         });
