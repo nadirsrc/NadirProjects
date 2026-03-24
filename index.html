@@ -10,7 +10,11 @@
 </head>
 <body>
 
-    <nav class="navbar">
+    <!-- Ambient background glows -->
+    <div class="bg-glows">
+        <div class="bg-glow-1"></div>
+        <div class="bg-glow-2"></div>
+    </div>    <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-logo">nadir<span>projects</span></a>
             <div class="nav-links">
@@ -29,16 +33,16 @@
 
     <header class="hero">
         <div class="hero-content">
-            <p class="hero-label">school & personal — <span id="totalProjects">0</span> projects</p>
-            <h1 class="hero-title">nadir<br>projects.</h1>
-            <p class="hero-desc">A collection of projects I've built — from school assignments to personal experiments. All in one place, just click and explore.</p>
+            <p class="hero-label">code & experiments — <span id="totalProjects">0</span> drops</p>
+            <h1 class="hero-title"><span class="text-gradient">nadir</span><span class="text-gradient-pop">projects.</span></h1>
+            <p class="hero-desc">Stuff I built for school assignments to late-night personal experiments. Snooping around is highly encouraged!</p>
         </div>
     </header>
 
-    <section class="section" id="recent">
+    <section class="section animate" id="recent">
         <div class="container">
             <div class="recent-header">
-                <h2 class="section-title">Recently added</h2>
+                <h2 class="section-title">Fresh drops</h2>
                 <span class="recent-badge" id="recentCount"></span>
             </div>
             <div class="recent-list" id="recentList">
@@ -47,13 +51,16 @@
         </div>
     </section>
 
-    <section class="section" id="projects">
+    <section class="section animate" id="projects">
         <div class="container">
-            <h2 class="section-title">All projects</h2>
+            <h2 class="section-title">The vault</h2>
 
             <div class="toolbar">
                 <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="Search projects..." autocomplete="off" spellcheck="false">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Look up a project by name, tech..." autocomplete="off" spellcheck="false">
                 </div>
                 <div class="filter-buttons" id="filterButtons">
                     <button class="filter-btn active" data-filter="all">All</button>
@@ -65,7 +72,7 @@
             </div>
 
             <div class="empty-state" id="emptyState" style="display: none;">
-                <p>No results found. Try a different keyword?</p>
+                <p>Nothing found! Try a different keyword?</p>
             </div>
         </div>
     </section>
