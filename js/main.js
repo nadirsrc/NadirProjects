@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSearch();
     initNavToggle();
     initSmoothScroll();
+    initObservers();
 });
 
 // Recently added — shows the 3 newest projects based on date
@@ -115,11 +116,12 @@ function renderRecent() {
 
     recentCount.textContent = recent.length + ' latest';
 
-    recentList.innerHTML = recent.map(p => {
+    recentList.innerHTML = recent.map((p, index) => {
         const d = new Date(p.date);
         const ago = getTimeAgo(d);
+        const delayClass = `delay-${(index % 3) + 1}`;
         return `
-        <div class="recent-item" data-url="${p.url}">
+        <div class="recent-item animate ${delayClass}" data-url="${p.url}">
             <div class="recent-item-top">
                 <span class="recent-item-title">${p.title}</span>
                 <span class="recent-item-time">${ago} · ${formatDate(p.date)}</span>
@@ -132,12 +134,17 @@ function renderRecent() {
     }).join('');
 
     recentList.querySelectorAll('.recent-item').forEach(item => {
+        item.addEventListener('mousemove', e => handleGlow(e, item));
         item.addEventListener('click', (e) => {
             if (e.target.closest('.project-popup')) return;
             e.stopPropagation();
             showProjectPopup(item, item.dataset.url);
         });
     });
+
+    if (window.globalObserver) {
+        recentList.querySelectorAll('.animate').forEach(el => window.globalObserver.observe(el));
+    }
 }
 
 function getTimeAgo(date) {
@@ -219,11 +226,11 @@ function showProjectPopup(el, url) {
     popup.innerHTML = `
         <a href="${url}" class="popup-option" target="_blank">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Visit Site
+            Check it out!
         </a>
         <button class="popup-option" onclick="copyLink('${fullUrl}', this)">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            <span>Copy Link</span>
+            <span>Snag Link</span>
         </button>
     `;
     el.style.position = 'relative';
@@ -247,7 +254,7 @@ function copyLink(url, btn) {
         span.textContent = 'Copied!';
         btn.classList.add('copied');
         setTimeout(() => {
-            span.textContent = 'Copy Link';
+            span.textContent = 'Snag Link';
             btn.classList.remove('copied');
             closePopup();
         }, 1200);
@@ -276,8 +283,10 @@ function renderProjects(projects) {
 
     emptyState.style.display = 'none';
 
-    projectsGrid.innerHTML = projects.map(p => `
-        <div class="project-item" data-url="${p.url}">
+    projectsGrid.innerHTML = projects.map((p, index) => {
+        const delayClass = `delay-${(index % 3) + 1}`;
+        return `
+        <div class="project-item animate ${delayClass}" data-url="${p.url}">
             <div class="project-info">
                 <div class="project-name">${p.title}</div>
                 <div class="project-desc">${p.description}</div>
@@ -293,15 +302,20 @@ function renderProjects(projects) {
                 <path d="m9 18 6-6-6-6"/>
             </svg>
         </div>
-    `).join('');
+    `}).join('');
 
     projectsGrid.querySelectorAll('.project-item').forEach(item => {
+        item.addEventListener('mousemove', e => handleGlow(e, item));
         item.addEventListener('click', (e) => {
             if (e.target.closest('.project-popup')) return;
             e.stopPropagation();
             showProjectPopup(item, item.dataset.url);
         });
     });
+
+    if (window.globalObserver) {
+        projectsGrid.querySelectorAll('.animate').forEach(el => window.globalObserver.observe(el));
+    }
 }
 
 function initNavToggle() {
@@ -325,4 +339,27 @@ function initSmoothScroll() {
             if (target) target.scrollIntoView({ behavior: 'smooth' });
         });
     });
+}
+
+window.globalObserver = null;
+
+function initObservers() {
+    window.globalObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.animate').forEach(el => window.globalObserver.observe(el));
+}
+
+function handleGlow(e, el) {
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    el.style.setProperty('--mouse-x', `${x}px`);
+    el.style.setProperty('--mouse-y', `${y}px`);
 }
