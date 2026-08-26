@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MotoKredit - Simulasi kredit motor online real-time. Hitung angsuran, bandingkan tenor, dan cari motor impian sesuai budget.">
+    <title>MotoKredit &mdash; Simulasi Kredit Motor Online Real-Time</title>
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Ambient background glowing spheres -->
+    <div class="bg-ambient-1"></div>
+    <div class="bg-ambient-2"></div>
+
+    <!-- NAVBAR -->
+    <nav class="nav-main">
+        <div class="container">
+            <div class="nav-inner">
+                <a class="nav-logo" href="#beranda">
+                    <span class="logo-text">MotoKredit</span>
+                </a>
+                
+                <button class="nav-toggle" id="navToggleBtn" aria-label="Toggle Navigation">
+                    <span></span><span></span><span></span>
+                </button>
+
+                <div class="nav-menu" id="navMenu">
+                    <a href="#beranda" class="active">Beranda</a>
+                    <a href="#simulasi">Simulasi</a>
+                    <a href="#komparasi">Komparasi Tenor</a>
+                    <a href="#budget">Cari Budget</a>
+                    <a href="#motor">Katalog Motor</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="beranda" class="hero">
+        <div class="container">
+            <div class="hero-inner">
+                <div class="hero-content reveal">
+                    <span class="hero-label"><i class="bi bi-lightning-charge-fill"></i> Simulasi Kredit Instant</span>
+                    <h1>Wujudkan motor<br>impianmu, <em>sekarang.</em></h1>
+                    <p class="hero-desc">Hitung angsuran bulanan secara real-time tanpa perlu reload. Uang muka fleksibel, komparasi tenor otomatis, dan 100% transparan.</p>
+                    <div class="hero-actions">
+                        <a href="#simulasi" class="btn-main">Hitung Angsuran <i class="bi bi-calculator-fill"></i></a>
+                        <a href="#motor" class="btn-ghost">Pilih Motor <i class="bi bi-arrow-down-short"></i></a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <strong>10%</strong>
+                            <span>DP Minimum</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat">
+                            <strong>5 Thn</strong>
+                            <span>Tenor Maks</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat">
+                            <strong>20%</strong>
+                            <span>Bunga/Tahun</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-visual reveal">
+                    <div class="hero-card-preview">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                            <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px;">Estimasi Terbaik</span>
+                            <span style="font-size: 0.75rem; background: var(--emerald-dim); color: var(--emerald); padding: 4px 10px; border-radius: var(--radius-full); font-weight: 700;">Live Update</span>
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-2);">Cicilan per bulan mulai:</div>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: var(--text); margin: 4px 0 16px 0;">Rp 755.556 <span style="font-size: 0.85rem; font-weight: 500; color: var(--text-3);">/bln</span></div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <span style="font-size: 0.75rem; background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: var(--radius-sm); color: var(--text-2);">DP 20%</span>
+                            <span style="font-size: 0.75rem; background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: var(--radius-sm); color: var(--text-2);">Tenor 36 Bln</span>
+                            <span style="font-size: 0.75rem; background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: var(--radius-sm); color: var(--text-2);">Bunga Flat</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SIMULASI SECTION -->
+    <section id="simulasi" style="padding: 80px 0;">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Kalkulator Modern</span>
+                <h2 class="section-title">Simulasi angsuran real-time</h2>
+                <p class="section-desc">Sesuaikan harga motor, DP, tenor, dan opsi tambahan untuk menghitung estimasi cicilan per bulan.</p>
+            </div>
+
+            <div class="sim-wrapper">
+                <!-- FORM SIDE -->
+                <div class="sim-form-card glass-card reveal">
+                    <div id="selectedMotorBadge" style="display: none; margin-bottom: 20px; padding: 12px 16px; background: var(--accent-dim); border: 1px solid var(--accent); border-radius: var(--radius-sm); font-size: 0.88rem; color: var(--accent); justify-content: space-between; align-items: center;">
+                        <span><i class="bi bi-check-circle-fill"></i> Motor Dipilih: <strong id="selectedMotorName">-</strong></span>
+                        <button type="button" onclick="clearSelectedMotor()" style="background:none; border:none; color:var(--text-2); cursor:pointer; font-size: 1rem;"><i class="bi bi-x-lg"></i></button>
+                    </div>
+
+                    <form id="calcForm" onsubmit="event.preventDefault();">
+                        <!-- Input harga motor -->
+                        <div class="field">
+                            <label for="harga_motor">Harga Motor</label>
+                            <div class="field-input">
+                                <span class="field-prefix">Rp</span>
+                                <input type="text" id="harga_motor" name="harga_motor" placeholder="25.000.000" value="25.000.000" required>
+                            </div>
+                            <!-- Preset chips -->
+                            <div class="chip-group">
+                                <button type="button" class="chip-btn" onclick="setHarga(17800000)">17.8 Jt (Beat)</button>
+                                <button type="button" class="chip-btn" onclick="setHarga(26500000)">26.5 Jt (Vario 160)</button>
+                                <button type="button" class="chip-btn" onclick="setHarga(32000000)">32 Jt (NMAX 155)</button>
+                                <button type="button" class="chip-btn" onclick="setHarga(62900000)">62.9 Jt (Ninja 250)</button>
+                            </div>
+                        </div>
+
+                        <!-- Input Uang Muka (DP) -->
+                        <div class="field">
+                            <label for="dp_persen">Uang Muka (DP)
+                                <span style="font-size: 0.78rem; color: var(--accent);" id="dpValLabel">20%</span>
+                            </label>
+                            <div class="field-input">
+                                <input type="number" id="dp_persen" name="dp_persen" placeholder="20" step="0.5" min="0" max="95" value="20" required>
+                                <span class="field-suffix">%</span>
+                            </div>
+                            <div class="slider-container">
+                                <input type="range" class="range-slider" id="dp_slider" min="5" max="80" value="20" step="1">
+                            </div>
+                            <!-- Preset DP chips -->
+                            <div class="chip-group">
+                                <button type="button" class="chip-btn dp-chip" onclick="setDp(10)">10%</button>
+                                <button type="button" class="chip-btn dp-chip active" onclick="setDp(20)">20%</button>
+                                <button type="button" class="chip-btn dp-chip" onclick="setDp(30)">30%</button>
+                                <button type="button" class="chip-btn dp-chip" onclick="setDp(50)">50%</button>
+                            </div>
+                        </div>
+
+                        <!-- Input Tenor Cicilan -->
+                        <div class="field">
+                            <label for="tenor_tahun">Tenor Cicilan (Tahun)
+                                <span style="font-size: 0.78rem; color: var(--accent);" id="tenorValLabel">3 Tahun</span>
+                            </label>
+                            <div class="field-input">
+                                <input type="number" id="tenor_tahun" name="tenor_tahun" placeholder="3" min="1" max="5" value="3" required>
+                                <span class="field-suffix">Tahun</span>
+                            </div>
+                            <div class="slider-container">
+                                <input type="range" class="range-slider" id="tenor_slider" min="1" max="5" value="3" step="1">
+                            </div>
+                            <!-- Preset Tenor chips -->
+                            <div class="chip-group">
+                                <button type="button" class="chip-btn tenor-chip" onclick="setTenor(1)">1 Thn (12 bln)</button>
+                                <button type="button" class="chip-btn tenor-chip" onclick="setTenor(2)">2 Thn (24 bln)</button>
+                                <button type="button" class="chip-btn tenor-chip active" onclick="setTenor(3)">3 Thn (36 bln)</button>
+                                <button type="button" class="chip-btn tenor-chip" onclick="setTenor(5)">5 Thn (60 bln)</button>
+                            </div>
+                        </div>
+
+                        <!-- Input Bunga Per Tahun (Flat) -->
+                        <div class="field">
+                            <label for="bunga_persen">Bunga Per Tahun (Flat)</label>
+                            <div class="field-input">
+                                <input type="number" id="bunga_persen" name="bunga_persen" placeholder="20" step="0.5" min="0" max="50" value="20">
+                                <span class="field-suffix">% / thn</span>
+                            </div>
+                        </div>
+
+                        <!-- Toggles Option (Biaya Admin & Asuransi TLO) -->
+                        <div class="toggle-field">
+                            <div>
+                                <strong style="font-size: 0.88rem; display: block; color: var(--text);">Biaya Administrasi</strong>
+                                <span style="font-size: 0.75rem; color: var(--text-3);">Termasuk fee admin leasing Rp 600.000</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="toggleAdminFee">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-field">
+                            <div>
+                                <strong style="font-size: 0.88rem; display: block; color: var(--text);">Asuransi TLO (Total Loss Only)</strong>
+                                <span style="font-size: 0.75rem; color: var(--text-3);">Perlindungan kehilangan 1.5%/thn</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="toggleInsurance">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div style="display: flex; gap: 12px; margin-top: 28px;">
+                            <button type="button" class="btn-main" onclick="calculateLoan(true)" style="flex: 1;">Hitung Sekarang <i class="bi bi-arrow-repeat"></i></button>
+                            <button type="button" class="btn-ghost" onclick="resetForm()">Reset</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- RESULT SIDE -->
+                <div class="sim-result-card glass-card reveal" id="hasil">
+                    <div class="result-highlight">
+                        <span class="result-label">Angsuran Per Bulan</span>
+                        <span class="result-amount" id="resAngsuran">Rp 755.556</span>
+                        <span class="result-tenor" id="resTenorText">selama 36 bulan (3 tahun)</span>
+                    </div>
+
+                    <!-- Breakdown Visual Bar -->
+                    <div class="progress-bar-container">
+                        <div class="bar-dp" id="barDp" style="width: 20%" title="DP"></div>
+                        <div class="bar-pokok" id="barPokok" style="width: 50%" title="Pokok Pinjaman"></div>
+                        <div class="bar-bunga" id="barBunga" style="width: 30%" title="Bunga"></div>
+                    </div>
+
+                    <div class="bar-legend">
+                        <span class="legend-item"><span class="legend-dot dot-dp"></span> Uang Muka DP (<span id="legDpPct">20%</span>)</span>
+                        <span class="legend-item"><span class="legend-dot dot-pokok"></span> Pokok Pinjaman</span>
+                        <span class="legend-item"><span class="legend-dot dot-bunga"></span> Total Bunga</span>
+                    </div>
+
+                    <div class="result-details">
+                        <div class="detail-row">
+                            <span>Harga Motor</span>
+                            <span id="resHarga">Rp 25.000.000</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Uang Muka (DP)</span>
+                            <span id="resDpRp">Rp 5.000.000 (20%)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Sisa Pokok Hutang</span>
+                            <span id="resSisaPokok">Rp 20.000.000</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Estimasi Total Bunga</span>
+                            <span id="resBungaRp">Rp 12.000.000 (20%/thn)</span>
+                        </div>
+                        <div class="detail-row total">
+                            <span>Total Pembayaran Kredit</span>
+                            <span id="resTotalPinjaman">Rp 32.000.000</span>
+                        </div>
+                    </div>
+
+                    <div class="result-actions">
+                        <button type="button" class="btn-ghost" onclick="openScheduleModal()">
+                            <i class="bi bi-table"></i> Jadwal Angsuran
+                        </button>
+                        <button type="button" class="btn-ghost" onclick="copyResultSummary()">
+                            <i class="bi bi-share-fill"></i> Salin Ringkasan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TENOR MATRIX COMPARISON -->
+    <section id="komparasi" style="padding: 60px 0; background: rgba(14, 14, 20, 0.4);">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Fitur Komparasi</span>
+                <h2 class="section-title">Perbandingan skema tenor</h2>
+                <p class="section-desc">Bandingkan besaran angsuran dan total bunga di setiap pilihan tenor secara otomatis.</p>
+            </div>
+
+            <div class="matrix-grid reveal" id="tenorMatrixGrid">
+                <!-- Fallback / Pre-populated matrix cards -->
+                <div class="matrix-card" onclick="setTenor(1)">
+                    <div class="matrix-tenor">1 Tahun (12x)</div>
+                    <div class="matrix-cicilan">Rp 2.000.000/bln</div>
+                    <div class="matrix-bunga">Total Bunga: Rp 4.000.000</div>
+                </div>
+                <div class="matrix-card" onclick="setTenor(2)">
+                    <div class="matrix-tenor">2 Tahun (24x)</div>
+                    <div class="matrix-cicilan">Rp 1.166.667/bln</div>
+                    <div class="matrix-bunga">Total Bunga: Rp 8.000.000</div>
+                </div>
+                <div class="matrix-card selected" onclick="setTenor(3)">
+                    <div class="matrix-tenor">3 Tahun (36x)</div>
+                    <div class="matrix-cicilan">Rp 755.556/bln</div>
+                    <div class="matrix-bunga">Total Bunga: Rp 12.000.000</div>
+                </div>
+                <div class="matrix-card" onclick="setTenor(4)">
+                    <div class="matrix-tenor">4 Tahun (48x)</div>
+                    <div class="matrix-cicilan">Rp 750.000/bln</div>
+                    <div class="matrix-bunga">Total Bunga: Rp 16.000.000</div>
+                </div>
+                <div class="matrix-card" onclick="setTenor(5)">
+                    <div class="matrix-tenor">5 Tahun (60x)</div>
+                    <div class="matrix-cicilan">Rp 666.667/bln</div>
+                    <div class="matrix-bunga">Total Bunga: Rp 20.000.000</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BUDGET CALCULATOR SECTION -->
+    <section id="budget" style="padding: 80px 0;">
+        <div class="container">
+            <div class="budget-card glass-card reveal">
+                <div class="section-header" style="margin-bottom: 30px;">
+                    <span class="section-label">Rekomendasi Pintar</span>
+                    <h2 class="section-title">Cari motor sesuai budget</h2>
+                    <p class="section-desc">Masukkan batas maksimal cicilan per bulan yang kamu sanggupi, kami hitungkan harga motor yang pas!</p>
+                </div>
+
+                <div style="max-width: 580px; margin: 0 auto;">
+                    <div class="field">
+                        <label for="budget_input">Target Budget Angsuran / Bulan</label>
+                        <div class="field-input">
+                            <span class="field-prefix">Rp</span>
+                            <input type="text" id="budget_input" placeholder="1.200.000" value="1.200.000">
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" class="range-slider" id="budget_slider" min="500000" max="3000000" step="50000" value="1200000">
+                        </div>
+                    </div>
+
+                    <div style="background: var(--bg-raised); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; text-align: center; margin-top: 24px;">
+                        <div style="font-size: 0.8rem; color: var(--text-2); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Maksimal Harga Motor Yang Sanggup Dibeli</div>
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent); margin: 6px 0;" id="budget_res_max">Rp 27.000.000</div>
+                        <div style="font-size: 0.88rem; color: var(--emerald);" id="budget_res_rec">Rekomendasi: Honda Vario 160 (Rp 26.500.000)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KATALOG MOTOR -->
+    <section id="motor" style="padding: 80px 0;">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Katalog Terpopuler</span>
+                <h2 class="section-title">Pilihan motor terbaru</h2>
+                <p class="section-desc">Klik "Simulasi Kredit" pada motor favoritmu untuk langsung mengisi kalkulator otomatis.</p>
+            </div>
+
+            <div class="catalog-controls reveal">
+                <div class="search-box">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="catalogSearch" placeholder="Cari nama motor (e.g. Vario, NMAX, Ninja)...">
+                </div>
+
+                <div class="filter-pills">
+                    <button type="button" class="filter-pill active" data-filter="all">Semua</button>
+                    <button type="button" class="filter-pill" data-filter="honda">Honda</button>
+                    <button type="button" class="filter-pill" data-filter="yamaha">Yamaha</button>
+                    <button type="button" class="filter-pill" data-filter="kawasaki">Kawasaki</button>
+                    <button type="button" class="filter-pill" data-filter="suzuki">Suzuki</button>
+                    <button type="button" class="filter-pill" data-filter="matic">Matic</button>
+                    <button type="button" class="filter-pill" data-filter="sport">Sport</button>
+                </div>
+            </div>
+
+            <div class="motor-grid reveal" id="catalogGrid">
+                <!-- Dynamically pre-populated catalog items -->
+                <div class="motor-item">
+                    <div class="motor-img">
+                        <img src="assets/images/beat.jpg" alt="Honda Beat" loading="lazy">
+                        <span class="tag">Best Seller</span>
+                    </div>
+                    <div class="motor-info">
+                        <div class="motor-meta">
+                            <span class="motor-brand">Honda</span>
+                            <span class="motor-cc">110cc · CVT</span>
+                        </div>
+                        <h3>Honda Beat</h3>
+                        <p class="motor-harga">Rp 17.800.000</p>
+                        <button class="motor-select-btn" onclick="selectMotor('Honda Beat', 17800000)">
+                            <i class="bi bi-calculator"></i> Simulasi Kredit
+                        </button>
+                    </div>
+                </div>
+
+                <div class="motor-item">
+                    <div class="motor-img">
+                        <img src="assets/images/vario.jpg" alt="Honda Vario 160" loading="lazy">
+                        <span class="tag">Populer</span>
+                    </div>
+                    <div class="motor-info">
+                        <div class="motor-meta">
+                            <span class="motor-brand">Honda</span>
+                            <span class="motor-cc">160cc · CVT</span>
+                        </div>
+                        <h3>Honda Vario 160</h3>
+                        <p class="motor-harga">Rp 26.500.000</p>
+                        <button class="motor-select-btn" onclick="selectMotor('Honda Vario 160', 26500000)">
+                            <i class="bi bi-calculator"></i> Simulasi Kredit
+                        </button>
+                    </div>
+                </div>
+
+                <div class="motor-item">
+                    <div class="motor-img">
+                        <img src="assets/images/nmax.jpg" alt="Yamaha NMAX 155" loading="lazy">
+                        <span class="tag">Baru</span>
+                    </div>
+                    <div class="motor-info">
+                        <div class="motor-meta">
+                            <span class="motor-brand">Yamaha</span>
+                            <span class="motor-cc">155cc · CVT</span>
+                        </div>
+                        <h3>Yamaha NMAX 155</h3>
+                        <p class="motor-harga">Rp 32.000.000</p>
+                        <button class="motor-select-btn" onclick="selectMotor('Yamaha NMAX 155', 32000000)">
+                            <i class="bi bi-calculator"></i> Simulasi Kredit
+                        </button>
+                    </div>
+                </div>
+
+                <div class="motor-item">
+                    <div class="motor-img">
+                        <img src="assets/images/ninja.jpg" alt="Kawasaki Ninja 250" loading="lazy">
+                        <span class="tag">Sport</span>
+                    </div>
+                    <div class="motor-info">
+                        <div class="motor-meta">
+                            <span class="motor-brand">Kawasaki</span>
+                            <span class="motor-cc">250cc · 6-Speed</span>
+                        </div>
+                        <h3>Kawasaki Ninja 250</h3>
+                        <p class="motor-harga">Rp 62.900.000</p>
+                        <button class="motor-select-btn" onclick="selectMotor('Kawasaki Ninja 250', 62900000)">
+                            <i class="bi bi-calculator"></i> Simulasi Kredit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <a href="#beranda" class="nav-logo">
+                        <span class="logo-text">MotoKredit</span>
+                    </a>
+                    <p>Aplikasi simulasi kredit motor online real-time. Hitung cicilan, komparasi tenor, dan wujudkan motor impianmu dengan mudah dan transparan.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Navigasi</h4>
+                        <a href="#beranda">Beranda</a>
+                        <a href="#simulasi">Simulasi</a>
+                        <a href="#komparasi">Komparasi Tenor</a>
+                        <a href="#budget">Cari Budget</a>
+                        <a href="#motor">Katalog Motor</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Fitur</h4>
+                        <a href="#simulasi">Kalkulator Real-Time</a>
+                        <a href="#komparasi">Tabel Amortisasi</a>
+                        <a href="#budget">Target Gaji</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear">2026</span> MotoKredit. 100% Static Web Compatible for GitHub Pages.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast-notification">
+        <i class="bi bi-check-circle-fill" style="color: var(--accent); font-size: 1.2rem;"></i>
+        <span id="toastText">Pesan pemberitahuan</span>
+    </div>
+
+    <!-- SCHEDULE MODAL -->
+    <div id="scheduleModalBackdrop" class="schedule-modal-backdrop">
+        <div class="schedule-modal">
+            <div class="modal-header">
+                <h3><i class="bi bi-calendar3" style="color: var(--accent);"></i> Rincian Jadwal Angsuran Bulanan</h3>
+                <button type="button" class="modal-close" onclick="closeScheduleModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Bulan</th>
+                            <th>Angsuran (Rp)</th>
+                            <th>Pokok (Rp)</th>
+                            <th>Bunga (Rp)</th>
+                            <th>Sisa Hutang (Rp)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scheduleTableBody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- APPLICATION LOGIC -->
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

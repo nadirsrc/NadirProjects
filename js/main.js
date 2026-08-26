@@ -1,13 +1,6 @@
 /* ================================================
    NADIR PROJECTS — Main JavaScript
-   ================================================
-   
-   HOW TO ADD A NEW PROJECT:
-   1. Add a new object to the "projectsData" array below
-   2. Fill in all the required fields
-   3. Create the project folder in /projects/folder-name/
-   4. Done! The project will automatically appear on the portal
-   
+   Modern Design System
    ================================================ */
 
 const projectsData = [
@@ -59,20 +52,28 @@ const projectsData = [
     {
         id: 6,
         title: "Motorcycle Loan Calculator",
-        description: "A PHP-based motorcycle installment calculator built as a personal project to practice backend development.",
+        description: "A modern motorcycle installment calculator with real-time calculations, DP presets, interest breakdown, and amortization schedule.",
         category: "Web Development",
-        tags: ["PHP", "HTML", "CSS"],
-        url: "https://motorcyclecalculator.gt.tc/",
-        isExternal: true,
+        tags: ["HTML", "CSS", "JS"],
+        url: "Projects/MotorcycleCalculator",
         date: "2026-02-10"
+    },
+    {
+        id: 7,
+        title: "Misa Bot Showcase",
+        description: "A WhatsApp Multi-Purpose Bot built from scratch using Node.js & Baileys with 70+ commands, school system, and marketplace automation.",
+        category: "Web Development",
+        tags: ["JS", "HTML", "CSS"],
+        url: "Projects/MisaBot",
+        date: "2026-08-02"
     },
 ];
 
-// Tech icon SVGs (inline, no external dependencies)
+// Tech icon SVGs
 const techIcons = {
     HTML: `<svg viewBox="0 0 24 24" fill="#e34f26"><path d="M1.5 0h21l-1.91 21.56L11.99 24l-8.59-2.44L1.5 0zm7.09 9.68l-.2-2.26h7.24l.59-6.72H2.88l1.78 19.96 6.59 1.83 6.6-1.83.93-10.48H12l-.17 2.26h3.6l-.34 3.81-3.1.86-3.09-.86-.19-2.12h-2.3l.33 4.58 5.25 1.46 5.24-1.46.71-7.96H8.79l-.2-2.07z"/></svg>`,
     CSS: `<svg viewBox="0 0 24 24" fill="#1572b6"><path d="M1.5 0h21l-1.91 21.56L11.99 24l-8.59-2.44L1.5 0zm17.09 4.3H5.65l.37 4.15h12.2l-.58 6.47-5.65 1.56-5.65-1.56-.4-4.37h3.93l.2 2.26 1.92.52 1.93-.52.2-2.26H5.83L5.43 6.4h13.35l-.19-2.1z"/></svg>`,
-    JS: `<svg viewBox="0 0 24 24" fill="#f7df1e"><path d="M0 0h24v24H0V0zm22.03 18.26c-.23-1.46-1.17-2.68-3.96-3.83-.97-.45-2.04-.78-2.36-1.52-.12-.43-.14-.67-.06-.93.21-.71 1.02-.92 1.69-.72.44.13.85.47 1.1 1.02 1.17-.77 1.17-.77 1.99-1.28-.3-.47-.46-.68-.67-.87-.74-.82-1.73-1.24-3.33-1.2l-.83.1c-.8.2-1.55.63-1.99 1.22-1.31 1.66-.93 4.56.33 5.75 1.24 1.27 3.07 1.55 4.15 2.67.36.44.52 1.16.16 1.72-.36.54-1.05.76-1.7.73-.7-.04-1.09-.38-1.52-1.18l-2.06 1.19c.24.54.52.78.93 1.25.97 1.09 2.5 1.69 4.18 1.59 1.61-.08 3-.68 3.72-2.14.69-1.2.73-3.52-.33-4.77zm-11.14-1.35l-2.47 0c0 1.95-.09 3.89-.09 5.84-.02 1.23.06 2.36-.16 2.71-.34.7-1.22.62-1.62.49-.41-.21-.62-.5-.84-.91-.06-.12-.11-.21-.16-.21l-2.06 1.27c.34.71.83 1.32 1.5 1.71.89.53 2.08.69 3.33.38 1.13-.36 1.96-1.04 2.31-2.21.24-.73.32-1.56.32-2.71-.01-2.15 0-4.3 0-6.46l.01-.9z"/></svg>`,
+    JS: `<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>JavaScript</title><path fill="#f7df1e" d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/></svg>`,
     Tailwind: `<svg viewBox="0 0 24 24" fill="#06b6d4"><path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z"/></svg>`,
     React: `<svg viewBox="0 0 24 24" fill="#61dafb"><path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.31 0-.594.063-.857.18-1.725.846-1.538 4.022-.275 7.07a20.9 20.9 0 0 0-2.614.98C1.356 10.67.246 11.89.246 12.81c0 1.006 1.29 2.307 3.549 3.386.76.365 1.613.688 2.537.968-1.27 3.074-1.441 6.265.271 7.108.264.12.55.18.854.18 1.384 0 3.17-.972 4.952-2.644 1.778 1.665 3.556 2.634 4.936 2.634.31 0 .597-.063.86-.181 1.725-.846 1.538-4.022.275-7.07a20.9 20.9 0 0 0 2.613-.98c2.258-1.08 3.37-2.303 3.37-3.223 0-1.006-1.29-2.307-3.549-3.386a20.894 20.894 0 0 0-2.537-.968c1.27-3.074 1.441-6.265-.271-7.108a1.594 1.594 0 0 0-.86-.18zM12 15.065a3.065 3.065 0 1 1 0-6.13 3.065 3.065 0 0 1 0 6.13z"/></svg>`,
     Vite: `<svg viewBox="0 0 24 24" fill="#646cff"><path d="m22.845 1.467-10.3 18.49a.547.547 0 0 1-.96.01L1.156 1.468a.547.547 0 0 1 .59-.802l10.14 1.932a.55.55 0 0 0 .207 0l9.16-1.932a.547.547 0 0 1 .592.801z"/></svg>`,
@@ -85,82 +86,78 @@ function getTechIconsHTML(tags) {
         if (svg) {
             return `<span class="tech-icon" title="${t}">${svg}</span>`;
         }
-        return `<span class="project-tag">${t}</span>`;
+        return '';
     }).join('');
 }
 
-// DOM
+// DOM Elements
 const projectsGrid = document.getElementById('projectsGrid');
 const searchInput = document.getElementById('searchInput');
 const filterButtons = document.getElementById('filterButtons');
 const emptyState = document.getElementById('emptyState');
 const totalProjectsEl = document.getElementById('totalProjects');
+const navbar = document.getElementById('navbar');
 
+// Initialize
 document.addEventListener('DOMContentLoaded', () => {
     totalProjectsEl.textContent = projectsData.length;
     renderRecent();
     generateFilterButtons();
     renderProjects(projectsData);
+    initScrollReveal();
+    initNavbar();
     initSearch();
     initNavToggle();
-    initSmoothScroll();
-    initObservers();
+    initMouseGlow();
 });
 
-// Recently added — shows the 3 newest projects based on date
+// Render recent projects
 function renderRecent() {
     const recentList = document.getElementById('recentList');
     const recentCount = document.getElementById('recentCount');
     const sorted = [...projectsData].sort((a, b) => new Date(b.date) - new Date(a.date));
     const recent = sorted.slice(0, 3);
 
-    recentCount.textContent = recent.length + ' latest';
+    recentCount.textContent = recent.length + ' projects';
 
-    recentList.innerHTML = recent.map((p, index) => {
-        const d = new Date(p.date);
-        const ago = getTimeAgo(d);
-        const delayClass = `delay-${(index % 3) + 1}`;
+    recentList.innerHTML = recent.map(p => {
         return `
-        <div class="recent-item animate ${delayClass}" data-url="${p.url}">
-            <div class="recent-item-top">
-                <span class="recent-item-title">${p.title}</span>
-                <span class="recent-item-time">${ago} · ${formatDate(p.date)}</span>
+        <div class="recent-card" data-url="${p.url}">
+            <div class="recent-card-header">
+                <span class="recent-card-title">${p.title}</span>
+                <span class="recent-card-time">${getTimeAgo(p.date)}</span>
             </div>
-            <div class="recent-item-bottom">
-                <span class="recent-item-cat">${p.category}</span>
-                <span class="recent-item-tech">${getTechIconsHTML(p.tags)}</span>
+            <div class="recent-card-footer">
+                <span class="recent-card-tag">${p.category}</span>
+                <div class="recent-card-tech">${getTechIconsHTML(p.tags)}</div>
             </div>
         </div>`;
     }).join('');
 
-    recentList.querySelectorAll('.recent-item').forEach(item => {
-        item.addEventListener('mousemove', e => handleGlow(e, item));
-        item.addEventListener('click', (e) => {
-            if (e.target.closest('.project-popup')) return;
-            e.stopPropagation();
-            showProjectPopup(item, item.dataset.url);
+    // Add click handlers
+    recentList.querySelectorAll('.recent-card').forEach(card => {
+        card.addEventListener('click', () => {
+            showProjectPopup(card, card.dataset.url);
         });
     });
-
-    if (window.globalObserver) {
-        recentList.querySelectorAll('.animate').forEach(el => window.globalObserver.observe(el));
-    }
 }
 
-function getTimeAgo(date) {
+function getTimeAgo(dateStr) {
+    const date = new Date(dateStr);
     const now = new Date();
     const diff = now - date;
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
     if (days === 0) return 'today';
     if (days === 1) return 'yesterday';
-    if (days < 7) return days + ' days ago';
+    if (days < 7) return days + 'd ago';
     if (days < 30) return Math.floor(days / 7) + 'w ago';
     if (days < 365) return Math.floor(days / 30) + 'mo ago';
     return Math.floor(days / 365) + 'y ago';
 }
 
 function formatDate(dateStr) {
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const d = new Date(dateStr);
     return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
 }
@@ -211,7 +208,7 @@ function filterProjects(category, term) {
 }
 
 function getFullUrl(url) {
-    if (url.startsWith('http://') || url.startsWith('https://')) return url;
+    if (url.startsWith('http')) return url;
     const base = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/');
     return base + url;
 }
@@ -221,29 +218,32 @@ let activePopup = null;
 function showProjectPopup(el, url) {
     closePopup();
     const fullUrl = getFullUrl(url);
+
     const popup = document.createElement('div');
     popup.className = 'project-popup';
     popup.innerHTML = `
-        <a href="${url}" class="popup-option" target="_blank">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Check it out!
+        <a href="${url}" class="popup-btn" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+            Open
         </a>
-        <button class="popup-option" onclick="copyLink('${fullUrl}', this)">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            <span>Snag Link</span>
+        <button class="popup-btn" onclick="copyLink('${fullUrl}', this)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>Copy</span>
         </button>
     `;
+
     el.style.position = 'relative';
     el.appendChild(popup);
     activePopup = { el, popup };
 
-    // Check if popup would overflow below the viewport
     requestAnimationFrame(() => {
-        const rect = el.getBoundingClientRect();
-        const spaceBelow = window.innerHeight - rect.bottom;
-        if (spaceBelow < 80) {
-            popup.classList.add('popup-above');
-        }
         popup.classList.add('show');
     });
 }
@@ -254,7 +254,7 @@ function copyLink(url, btn) {
         span.textContent = 'Copied!';
         btn.classList.add('copied');
         setTimeout(() => {
-            span.textContent = 'Snag Link';
+            span.textContent = 'Copy';
             btn.classList.remove('copied');
             closePopup();
         }, 1200);
@@ -269,7 +269,7 @@ function closePopup() {
 }
 
 document.addEventListener('click', (e) => {
-    if (activePopup && !e.target.closest('.project-popup') && !e.target.closest('.project-item') && !e.target.closest('.recent-item')) {
+    if (activePopup && !e.target.closest('.project-popup') && !e.target.closest('.project-card') && !e.target.closest('.recent-card')) {
         closePopup();
     }
 });
@@ -283,83 +283,80 @@ function renderProjects(projects) {
 
     emptyState.style.display = 'none';
 
-    projectsGrid.innerHTML = projects.map((p, index) => {
-        const delayClass = `delay-${(index % 3) + 1}`;
-        return `
-        <div class="project-item animate ${delayClass}" data-url="${p.url}">
+    projectsGrid.innerHTML = projects.map(p => `
+        <div class="project-card" data-url="${p.url}">
             <div class="project-info">
                 <div class="project-name">${p.title}</div>
                 <div class="project-desc">${p.description}</div>
-                <div class="project-tags">
-                    ${getTechIconsHTML(p.tags)}
-                </div>
             </div>
             <div class="project-meta">
                 <span class="project-date">${formatDate(p.date)}</span>
                 <span class="project-category">${p.category}</span>
             </div>
             <svg class="project-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m9 18 6-6-6-6"/>
+                <path d="m9 18 6-6-6-6"></path>
             </svg>
         </div>
-    `}).join('');
+    `).join('');
 
-    projectsGrid.querySelectorAll('.project-item').forEach(item => {
-        item.addEventListener('mousemove', e => handleGlow(e, item));
-        item.addEventListener('click', (e) => {
-            if (e.target.closest('.project-popup')) return;
-            e.stopPropagation();
-            showProjectPopup(item, item.dataset.url);
+    // Add click handlers
+    projectsGrid.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('click', () => {
+            showProjectPopup(card, card.dataset.url);
         });
     });
-
-    if (window.globalObserver) {
-        projectsGrid.querySelectorAll('.animate').forEach(el => window.globalObserver.observe(el));
-    }
 }
 
+// Scroll reveal
+function initScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+// Navbar scroll effect
+function initNavbar() {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+}
+
+// Mobile nav toggle
 function initNavToggle() {
     const toggle = document.getElementById('navToggle');
     const menu = document.getElementById('mobileMenu');
 
     toggle.addEventListener('click', () => {
+        toggle.classList.toggle('active');
         menu.classList.toggle('show');
     });
 
     menu.querySelectorAll('.mobile-link').forEach(link => {
-        link.addEventListener('click', () => menu.classList.remove('show'));
-    });
-}
-
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', e => {
-            e.preventDefault();
-            const target = document.querySelector(a.getAttribute('href'));
-            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        link.addEventListener('click', () => {
+            toggle.classList.remove('active');
+            menu.classList.remove('show');
         });
     });
 }
 
-window.globalObserver = null;
-
-function initObservers() {
-    window.globalObserver = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('in-view');
-                obs.unobserve(entry.target);
-            }
+// Mouse glow effect
+function initMouseGlow() {
+    document.querySelectorAll('.project-card, .recent-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.animate').forEach(el => window.globalObserver.observe(el));
-}
-
-function handleGlow(e, el) {
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    el.style.setProperty('--mouse-x', `${x}px`);
-    el.style.setProperty('--mouse-y', `${y}px`);
+    });
 }

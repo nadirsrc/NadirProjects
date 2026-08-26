@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Misa Bot — WhatsApp Multi-Purpose Bot Showcase</title>
+  <meta name="description" content="Showcase project Misa Bot — WhatsApp Multi-Purpose Bot bertema Misa Amane (Death Note) yang dikembangkan dari nol menggunakan Node.js, Baileys API, dan GroqCloud AI oleh Nadir.">
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Gothic Ambient Background Glows -->
+  <div class="bg-ambient">
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+  </div>
+  <div class="bg-grid"></div>
+
+  <!-- Header Navigation -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-brand">
+        <div>
+          <span class="nav-title">Misa Bot</span>
+          <span class="nav-subtitle">Death Note Theme</span>
+        </div>
+      </a>
+      
+      <!-- Desktop Navigation Links -->
+      <div class="nav-links">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#tech-stack" class="nav-link">Tech Stack</a>
+        <a href="#architecture" class="nav-link">Architecture</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+
+      <!-- Desktop Action Buttons -->
+      <div class="nav-actions">
+        <a href="https://wa.me/6283899669500?text=.menu" target="_blank" class="wa-nav-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          Chat Bot
+        </a>
+        <a href="../../index.html" class="back-portal-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Portal
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer Overlay Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#about" class="mobile-nav-link">About</a>
+      <a href="#features" class="mobile-nav-link">Features</a>
+      <a href="#tech-stack" class="mobile-nav-link">Tech Stack</a>
+      <a href="#architecture" class="mobile-nav-link">Architecture</a>
+      <a href="#contact" class="mobile-nav-link">Contact</a>
+      <div class="mobile-nav-actions">
+        <a href="https://wa.me/6283899669500?text=.menu" target="_blank" class="wa-nav-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          Chat Misa Bot
+        </a>
+        <a href="../../index.html" class="back-portal-btn">Back to Portal</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION WITH MISA AMANE VISUAL -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          
+          <!-- Hero Text Column -->
+          <div class="hero-content reveal-left">
+            <div class="hero-pill-category">
+              <span class="dot"></span> Misa Amane Dark Gothic Theme
+            </div>
+            <h1 class="hero-title">
+              <span class="gradient-text">Misa Bot</span>
+            </h1>
+            <p class="hero-tagline">
+              WhatsApp Multi-Purpose Bot — Built with Node.js & Baileys
+            </p>
+            <p class="hero-desc">
+              Misa Bot adalah WhatsApp Bot serbaguna bertema <strong>Misa Amane (Death Note)</strong> yang dirancang modular menggunakan Node.js dan library Baileys tanpa framework bot pihak ketiga. Dikembangkan dari nol untuk otomasi pesan, manajemen tugas sekolah, integrasi marketplace, hingga auto-delivery game.
+            </p>
+
+            <!-- Tech Pills -->
+            <div class="tech-pills">
+              <span class="tech-pill highlight">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                GroqCloud AI
+              </span>
+              <span class="tech-pill">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                Node.js
+              </span>
+              <span class="tech-pill">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                Baileys API
+              </span>
+              <span class="tech-pill">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                JavaScript
+              </span>
+            </div>
+
+            <!-- Metrics Row -->
+            <div class="metrics-row">
+              <div class="metric-item">
+                <div class="metric-value" data-count="70">70+</div>
+                <div class="metric-label">Commands Built</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-value" data-count="12">12</div>
+                <div class="metric-label">Core Categories</div>
+              </div>
+              <div class="metric-item">
+                <div class="metric-value">24/7</div>
+                <div class="metric-label">PM2 Uptime</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Misa Amane Character Visual Card -->
+          <div class="misa-avatar-wrapper reveal-right delay-2">
+            <div class="misa-avatar-card">
+              <div class="misa-img-container">
+                <img src="assets/misa.png" alt="Misa Amane - MisaBot Character Visual">
+              </div>
+              <div class="misa-badge-overlay">
+                <div>
+                  <div class="misa-name">Misa Amane</div>
+                  <div style="font-size: 0.75rem; color: #a1a1aa;">Death Note Mascot</div>
+                </div>
+                <span class="misa-tag">MisaBot v2.0</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT / OVERVIEW SECTION -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Overview</span>
+          <h2 class="section-title">Custom Architecture</h2>
+          <p class="section-subtitle">Dikembangkan mandiri tanpa framework bot template / copy-paste.</p>
+        </div>
+
+        <div class="about-card reveal-scale">
+          <div class="about-grid">
+            <div class="about-text">
+              <p>
+                <strong>Misa Bot</strong> dikembangkan oleh Nadir menggunakan <strong>Node.js</strong> dan library <strong>@whiskeysockets/baileys</strong> secara manual dari tingkat dasar. Dinamai berdasarkan karakter anime <em>Misa Amane</em> dari Death Note, bot ini mengusung estetika dark gothic dengan performa tinggi.
+              </p>
+              <p>
+                Engine AI dalam Misa Bot ditenagai oleh <strong>GroqCloud API</strong> (Groq / Llama 3) yang memberikan kecepatan komputasi super cepat dalam memproses percakapan interaktif. Selain itu, bot menangani downloader media 6+ platform, manajemen tugas sekolah otomatis, integrasi toko online Itemku.id, hingga auto-delivery game Roblox via HTTP polling executor.
+              </p>
+
+              <div class="about-highlight-box">
+                <p>💡 <strong>GroqCloud Powered:</strong> Memanfaatkan arsitektur LPU GroqCloud untuk respons AI tanpa delay dalam percakapan WhatsApp.</p>
+              </div>
+            </div>
+
+            <!-- Terminal Preview Graphic -->
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <div class="term-dot red"></div>
+                <div class="term-dot yellow"></div>
+                <div class="term-dot green"></div>
+                <span class="term-title">misa-bot/groq-ai.js</span>
+              </div>
+              <div class="terminal-body">
+                <span class="code-comment">// GroqCloud API Fast AI Inference</span><br>
+                <span class="code-keyword">const</span> Groq = <span class="code-fn">require</span>(<span class="code-str">'groq-sdk'</span>);<br>
+                <span class="code-keyword">const</span> groq = <span class="code-keyword">new</span> Groq({ apiKey: process.env.GROQ_API_KEY });<br><br>
+                <span class="code-keyword">async function</span> <span class="code-fn">askMisaAI</span>(prompt) {<br>
+                &nbsp;&nbsp;<span class="code-keyword">return await</span> groq.chat.completions.<span class="code-fn">create</span>({<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;messages: [{ role: <span class="code-str">'user'</span>, content: prompt }],<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;model: <span class="code-str">'llama-3.3-70b-versatile'</span><br>
+                &nbsp;&nbsp;});<br>
+                }<span class="term-cursor"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section id="features" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Features & Capabilities</span>
+          <h2 class="section-title">Command & Feature Matrix</h2>
+          <p class="section-subtitle">Fitur dan modul lengkap yang terintegrasi di Misa Bot.</p>
+        </div>
+
+        <div class="features-grid">
+
+          <!-- 1. Media Downloader -->
+          <div class="feature-card reveal delay-1">
+            <div class="feature-icon-wrapper">📥</div>
+            <h3 class="feature-title">Media Downloader</h3>
+            <p class="feature-desc">Unduh media dari berbagai platform sosial media secara otomatis dan instan.</p>
+            <ul class="feature-list">
+              <li class="feature-item"><span class="feature-bullet">•</span> TikTok Video Downloader (tanpa watermark)</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Instagram Post & Reels Downloader</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> YouTube Audio & Video Downloader</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Pinterest Image Search & Download</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Spotify Track Downloader</li>
+            </ul>
+          </div>
+
+          <!-- 2. AI & Chat Assistant (GroqCloud API) -->
+          <div class="feature-card reveal delay-2">
+            <div class="feature-icon-wrapper">🤖</div>
+            <h3 class="feature-title">AI & Chat Assistant <span class="badge-highlight">Groq AI</span></h3>
+            <p class="feature-desc">Asisten percakapan cerdas berbasis GroqCloud API (Ultra-fast Llama 3 inference).</p>
+            <ul class="feature-list">
+              <li class="feature-item"><span class="feature-bullet">•</span> Tanya jawab cerdas (powered by GroqCloud API)</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Memory session percakapan tersimpan per user</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Mode kepribadian custom & reset memory</li>
+            </ul>
+          </div>
+
+          <!-- 3. Tools & Media Processing -->
+          <div class="feature-card reveal delay-3">
+            <div class="feature-icon-wrapper">🛠️</div>
+            <h3 class="feature-title">Tools & Media Processing</h3>
+            <p class="feature-desc">Koleksi alat pengolah media dan utilitas praktis dalam satu bot.</p>
+            <ul class="feature-list">
+              <li class="feature-item"><span class="feature-bullet">•</span> Sticker Maker (gambar / video / GIF ke stiker)</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Background Remover otomatis</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> HD Upscaler (foto & video)</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Translator multi-bahasa</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Link Bypass (shortlink / adfly)</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Password & Username Generator</li>
+            </ul>
+          </div>
+
+          <!-- 4. Fun & Creative Maker -->
+          <div class="feature-card reveal delay-1">
+            <div class="feature-icon-wrapper">🎨</div>
+            <h3 class="feature-title">Fun & Creative Maker</h3>
+            <p class="feature-desc">Fitur hiburan dan pembuat konten kreatif secara interaktif.</p>
+            <ul class="feature-list">
+              <li class="feature-item"><span class="feature-bullet">•</span> Brat-style Sticker & Video Generator</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> iPhone Fake Chat Generator</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Meme Sticker Maker</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> GTA Wasted Effect Overlay</li>
+            </ul>
+          </div>
+
+          <!-- 5. Utility & School System -->
+          <div class="feature-card reveal delay-2">
+            <div class="feature-icon-wrapper">📚</div>
+            <h3 class="feature-title">Utility & School System <span class="badge-highlight">Custom</span></h3>
+            <p class="feature-desc">Fitur informasi umum dan sistem manajemen akademik sekolah.</p>
+            <ul class="feature-list">
+              <li class="feature-item"><span class="feature-bullet">•</span> Cuaca real-time & Info Gempa BMKG</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> QR Code Generator & Scanner</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Kurs mata uang & URL Shortener</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> <strong>Sistem Tugas Sekolah:</strong> Interactive wizard dengan dropdown list, deadline otomatis jadwal pelajaran, reminder H-1 & H-6, lampiran foto, & batch actions</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Jadwal Pelajaran Sekolah dengan auto-reminder harian</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Pelacakan Resi Pengiriman ekspedisi</li>
+            </ul>
+          </div>
+
+          <!-- 6. Group Management -->
+          <div class="feature-card reveal delay-3">
+            <div class="feature-icon-wrapper">👥</div>
+            <h3 class="feature-title">Group Management</h3>
+            <p class="feature-desc">Moderasi dan pengaturan grup WhatsApp secara penuh dan efisien.</p>
+            <ul class="feature-list">
+              <li class="feature-item"><span class="feature-bullet">•</span> Kick / Promote / Demote anggota grup</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Tag All & Hidden Tag broadcast</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Anti-Link Protection System</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> View Once Media Bypass</li>
+            </ul>
+          </div>
+
+          <!-- 7. Admin & Owner Control -->
+          <div class="feature-card reveal delay-1">
+            <div class="feature-icon-wrapper">🔑</div>
+            <h3 class="feature-title">Admin & Owner Control</h3>
+            <p class="feature-desc">Panel kontrol lengkap untuk admin dan pemilik bot.</p>
+            <ul class="feature-list">
+              <li class="feature-item"><span class="feature-bullet">•</span> Multi-admin authorization system</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Broadcast pesan massal ke semua grup</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Block / Unblock management</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Auto-clear chat scheduler & DB clean</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Bot status & system RAM/CPU monitoring</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Auto-send scheduled messages</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Email forwarding ke WhatsApp</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> TOTP/2FA Code Generator dengan copy button</li>
+            </ul>
+          </div>
+
+          <!-- 8. Itemku Marketplace Integration -->
+          <div class="feature-card reveal delay-2">
+            <div class="feature-icon-wrapper">🛍️</div>
+            <h3 class="feature-title">Itemku Integration <span class="badge-highlight">API</span></h3>
+            <p class="feature-desc">Integrasi langsung dengan API marketplace Itemku.id untuk toko online.</p>
+            <ul class="feature-list">
+              <li class="feature-item"><span class="feature-bullet">•</span> Setup API key & notifikasi pesanan otomatis</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Lihat, proses, kirim, atau tolak pesanan masuk</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Manajemen produk (update harga & stok)</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Real-time order notification ke WhatsApp</li>
+            </ul>
+          </div>
+
+          <!-- 9. Roblox Auto-Delivery Engine -->
+          <div class="feature-card reveal delay-3">
+            <div class="feature-icon-wrapper">🎮</div>
+            <h3 class="feature-title">Roblox Delivery Engine <span class="badge-highlight">Automation</span></h3>
+            <p class="feature-desc">Pengiriman otomatis produk digital Roblox terintegrasi dengan executor.</p>
+            <ul class="feature-list">
+              <li class="feature-item"><span class="feature-bullet">•</span> Auto delivery pesanan Itemku ke game Roblox</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Koneksi real-time Roblox Executor via HTTP polling</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Auto-execute (interval 5 menit) & Instant mode</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Manajemen akun bot game & ban/unban system</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Manual delivery override via WhatsApp command</li>
+            </ul>
+          </div>
+
+          <!-- 10. GitHub & Database -->
+          <div class="feature-card reveal delay-1">
+            <div class="feature-icon-wrapper">⚡</div>
+            <h3 class="feature-title">GitHub & Database</h3>
+            <p class="feature-desc">Pencarian profil GitHub dan manajemen database internal bot.</p>
+            <ul class="feature-list">
+              <li class="feature-item"><span class="feature-bullet">•</span> GitHub profile & repository lookup</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Account extractor dari format teks</li>
+              <li class="feature-item"><span class="feature-bullet">•</span> Internal database statistics & records viewer</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH STACK SECTION -->
+    <section id="tech-stack" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Technologies</span>
+          <h2 class="section-title">Under the Hood</h2>
+          <p class="section-subtitle">Teknologi dan API yang digunakan dalam pengembangan Misa Bot.</p>
+        </div>
+
+        <div class="tech-grid reveal-scale">
+          <div class="tech-card">
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="#f43f5e"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <div>
+              <div class="tech-name">GroqCloud API</div>
+              <div class="tech-role">Ultra-fast AI Engine</div>
+            </div>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="#68a063"><path d="M12 2L2 7.5v9L12 22l10-5.5v-9L12 2zm0 2.2l7.5 4.1v7.4L12 19.8l-7.5-4.1V8.3L12 4.2z"/></svg>
+            </div>
+            <div>
+              <div class="tech-name">Node.js</div>
+              <div class="tech-role">JavaScript Runtime</div>
+            </div>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="#e11d48"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div>
+              <div class="tech-name">Baileys</div>
+              <div class="tech-role">WhatsApp Web API</div>
+            </div>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="#f7df1e"><path d="M0 0h24v24H0V0zm22.03 18.26c-.23-1.46-1.17-2.68-3.96-3.83-.97-.45-2.04-.78-2.36-1.52-.12-.43-.14-.67-.06-.93.21-.71 1.02-.92 1.69-.72.44.13.85.47 1.1 1.02 1.17-.77 1.17-.77 1.99-1.28-.3-.47-.46-.68-.67-.87-.74-.82-1.73-1.24-3.33-1.2l-.83.1c-.8.2-1.55.63-1.99 1.22-1.31 1.66-.93 4.56.33 5.75 1.24 1.27 3.07 1.55 4.15 2.67.36.44.52 1.16.16 1.72-.36.54-1.05.76-1.7.73-.7-.04-1.09-.38-1.52-1.18l-2.06 1.19c.24.54.52.78.93 1.25.97 1.09 2.5 1.69 4.18 1.59 1.61-.08 3-.68 3.72-2.14.69-1.2.73-3.52-.33-4.77zm-11.14-1.35l-2.47 0c0 1.95-.09 3.89-.09 5.84-.02 1.23.06 2.36-.16 2.71-.34.7-1.22.62-1.62.49-.41-.21-.62-.5-.84-.91-.06-.12-.11-.21-.16-.21l-2.06 1.27c.34.71.83 1.32 1.5 1.71.89.53 2.08.69 3.33.38 1.13-.36 1.96-1.04 2.31-2.21.24-.73.32-1.56.32-2.71-.01-2.15 0-4.3 0-6.46l.01-.9z"/></svg>
+            </div>
+            <div>
+              <div class="tech-name">JavaScript</div>
+              <div class="tech-role">Core Programming Language</div>
+            </div>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="#3b82f6"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+            </div>
+            <div>
+              <div class="tech-name">PM2</div>
+              <div class="tech-role">Production Process Manager</div>
+            </div>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="#a855f7"><path d="M12 2C6.47 2 2 4.47 2 7.5v9C2 19.53 6.47 22 12 22s10-2.47 10-5.5v-9C22 4.47 17.53 2 12 2zm0 3c4.41 0 8 1.79 8 3.5S16.41 12 12 12 4 10.21 4 8.5 7.59 5 12 5zm0 14c-4.41 0-8-1.79-8-3.5v-2.1c1.84 1.25 4.75 2.1 8 2.1s6.16-.85 8-2.1v2.1c0 1.71-3.59 3.5-8 3.5z"/></svg>
+            </div>
+            <div>
+              <div class="tech-name">JSON File DB</div>
+              <div class="tech-role">Lightweight Local Database</div>
+            </div>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="#10b981"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            </div>
+            <div>
+              <div class="tech-name">REST APIs</div>
+              <div class="tech-role">External Services Integration</div>
+            </div>
+          </div>
+
+          <div class="tech-card">
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="#5865F2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+            </div>
+            <div>
+              <div class="tech-name">Discord.js</div>
+              <div class="tech-role">Error Logging Integration</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE HIGHLIGHTS SECTION -->
+    <section id="architecture" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label">Deep Dive</span>
+          <h2 class="section-title">Architecture Highlights</h2>
+          <p class="section-subtitle">Solusi teknis dan inovasi arsitektur dalam pengembangan Misa Bot.</p>
+        </div>
+
+        <div class="arch-grid">
+          
+          <div class="arch-card reveal-left delay-1">
+            <span class="arch-badge-num">01 / INTERACTIVE UI</span>
+            <h3 class="arch-title">WhatsApp NativeFlow UI</h3>
+            <p class="arch-desc">
+              Memanfaatkan pesan interaktif NativeFlow WhatsApp (seperti tombol, list dropdown/section, dan form interaktif) untuk navigasi bot. Pengguna tidak perlu mengetik perintah teks yang rumit, memberikan pengalaman layaknya menggunakan aplikasi native.
+            </p>
+          </div>
+
+          <div class="arch-card reveal-right delay-2">
+            <span class="arch-badge-num">02 / SMART ACADEMIC WIZARD</span>
+            <h3 class="arch-title">Smart Task Manager Engine</h3>
+            <p class="arch-desc">
+              Sistem wizard multi-step interaktif untuk pencatatan tugas sekolah. Dilengkapi deteksi deadline otomatis berdasarkan jadwal mata pelajaran harian, penjadwalan reminder otomatis H-1 & H-6, dukungan lampiran foto tugas, dan batch operations.
+            </p>
+          </div>
+
+          <div class="arch-card reveal-left delay-3">
+            <span class="arch-badge-num">03 / MULTI-PLATFORM MEDIA ENGINE</span>
+            <h3 class="arch-title">Resilient Downloader Pipeline</h3>
+            <p class="arch-desc">
+              Engine pengunduh media yang mendukung 6+ platform utama. Dilengkapi fitur auto-detection URL format, penanganan streaming buffer memori yang efisien, serta sistem fallback otomatis jika salah satu API provider mengalami kegagalan.
+            </p>
+          </div>
+
+          <div class="arch-card reveal-right delay-4">
+            <span class="arch-badge-num">04 / ZERO-TOUCH FULFILLMENT</span>
+            <h3 class="arch-title">Roblox Game Delivery Pipeline</h3>
+            <p class="arch-desc">
+              Pipeline otomatisasi penuh dari notifikasi order marketplace Itemku.id → diproses oleh Misa Bot di WhatsApp → diteruskan ke in-game Roblox Executor via HTTP polling server tanpa intervensi manual dari penjual.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- WHATSAPP CONTACT SECTION -->
+    <section id="contact" class="section contact-section">
+      <div class="container">
+        <div class="contact-card reveal-scale">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          </div>
+          <h2 class="contact-title">Hubungi Misa Bot di WhatsApp</h2>
+          <p class="contact-desc">
+            Ingin mencoba fitur Misa Bot langsung di WhatsApp? Klik tombol di bawah ini untuk memulai obrolan dengan perintah <strong>.menu</strong> secara otomatis.
+          </p>
+          <a href="https://wa.me/6283899669500?text=.menu" target="_blank" class="btn-whatsapp-large">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+            Chat Misa Bot (083899669500)
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text">Built by <strong>Nadir</strong> — 2026</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
