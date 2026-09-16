@@ -17,10 +17,29 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent !important;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
+}
+
+/* Remove all focus outlines on mobile */
+*:focus {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Remove touch feedback on all buttons and interactive elements */
+button, a, .custom-select-trigger, .deadline-display, .preset, .upload, .mode-btn, .mapel-toggle-btn, .custom-select-option {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none;
+    -moz-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+    outline: none !important;
+}
+
+button:focus, a:focus, .custom-select-trigger:focus {
+    outline: none !important;
 }
 
 body {
