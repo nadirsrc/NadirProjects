@@ -557,8 +557,8 @@ textarea {
 
 .upload:hover { border-color: var(--accent); }
 .upload input { display: none; }
-.upload span { color: var(--accent); }
-.upload svg { width: 20px; height: 20px; opacity: 0.6; flex-shrink: 0; }
+.upload span { color: var(--accent); white-space: nowrap; }
+.upload svg { width: 18px; height: 18px; opacity: 0.5; flex-shrink: 0; }
 
 /* =========================================
    Preview
