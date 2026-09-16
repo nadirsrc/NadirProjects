@@ -13,32 +13,69 @@
     --error: #f87171;
 }
 
+html {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
     -webkit-tap-highlight-color: transparent !important;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
+    -webkit-focus-ring-color: transparent !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
-/* Remove all focus outlines on mobile */
-*:focus {
+/* Remove ALL focus outlines everywhere */
+*:focus, *:focus-visible, *::-moz-focus-inner {
     outline: none !important;
+    border: none !important;
     -webkit-tap-highlight-color: transparent !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    box-shadow: none !important;
 }
 
-/* Remove touch feedback on all buttons and interactive elements */
-button, a, .custom-select-trigger, .deadline-display, .preset, .upload, .mode-btn, .mapel-toggle-btn, .custom-select-option {
+/* Remove selection color */
+::selection, *::selection, *::-moz-selection {
+    background: transparent !important;
+    color: inherit !important;
+}
+
+/* Remove all touch feedback on interactive elements */
+button, a, [role="button"], .custom-select-trigger, .deadline-display, .preset, .upload, .mode-btn, .mapel-toggle-btn, .custom-select-option, .calendar-day {
+    -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
     -webkit-tap-highlight-color: transparent !important;
     -webkit-touch-callout: none;
-    -moz-tap-highlight-color: transparent;
-    tap-highlight-color: transparent;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    -webkit-focus-ring-width: 0 !important;
+    -webkit-focus-ring-color: transparent !important;
     outline: none !important;
 }
 
-button:focus, a:focus, .custom-select-trigger:focus {
+input, select, textarea {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+}
+
+button::-moz-focus-inner, *::-moz-focus-inner {
+    border: 0 !important;
     outline: none !important;
 }
 
