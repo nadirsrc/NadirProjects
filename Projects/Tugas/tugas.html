@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas - XII RPL 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Custom Validation Toast -->
+    <div class="validation-toast" id="validationToast">
+        <div class="validation-toast-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+        </div>
+        <span class="validation-toast-text" id="validationToastText"></span>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Kembali
+        </a>
+
+        <div class="header">
+            <div class="logo-wrapper">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-title">Tugas</span>
+                    <span class="logo-subtitle">XII RPL 1</span>
+                </div>
+            </div>
+            <h1>Tambah Tugas</h1>
+            <p class="subtitle">Isi form untuk mengirim tugas</p>
+        </div>
+
+        <div id="alert" class="alert"></div>
+
+        <div class="mode-toggle" data-active="guru">
+            <div class="mode-slider"></div>
+            <button type="button" class="mode-btn active" data-mode="guru">Guru</button>
+            <button type="button" class="mode-btn" data-mode="siswa">Siswa</button>
+        </div>
+
+        <form id="form" novalidate>
+            <!-- Siswa (mode siswa) -->
+            <div class="field siswa-field form-field field-hidden">
+                <label>Nama Siswa</label>
+                <input type="text" id="siswa" placeholder="Nama kamu">
+            </div>
+
+            <!-- Mapel (Siswa mode) -->
+            <div class="field siswa-field form-field field-hidden" id="siswaMapelField">
+                <label>Mapel</label>
+                <!-- Toggle between dropdown and custom -->
+                <div class="mapel-toggle">
+                    <button type="button" class="mapel-toggle-btn active" data-type="dropdown">Pilih</button>
+                    <button type="button" class="mapel-toggle-btn" data-type="custom">Custom</button>
+                </div>
+                <!-- Dropdown option -->
+                <div class="custom-select" id="siswaMapelSelectWrapper">
+                    <div class="custom-select-trigger">
+                        <span>Pilih mapel</span>
+                        <div class="custom-select-arrow">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="custom-select-dropdown" id="siswaMapelDropdown"></div>
+                </div>
+                <select id="siswaMapel" style="display:none;">
+                    <option value="">Pilih mapel</option>
+                </select>
+                <!-- Custom input option -->
+                <input type="text" id="siswaMapelCustom" placeholder="Ketik mapel sendiri..." style="display: none;">
+            </div>
+
+            <!-- Mapel (Guru mode) -->
+            <div class="field guru-field form-field" id="mapelField">
+                <label>Mapel</label>
+                <div class="custom-select" id="mapelSelectWrapper">
+                    <div class="custom-select-trigger">
+                        <span>Pilih mapel</span>
+                        <div class="custom-select-arrow">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="custom-select-dropdown" id="mapelDropdown"></div>
+                </div>
+                <select id="mapel" style="display:none;">
+                    <option value="">Pilih mapel</option>
+                </select>
+            </div>
+
+            <!-- Guru (auto-fill or dropdown) -->
+            <div class="field guru-field form-field">
+                <label>Guru</label>
+                <input type="text" id="guru" placeholder="Dipilih otomatis" readonly>
+                <div id="guruSelectWrapper" style="display: none;">
+                    <div class="custom-select" id="guruCustomSelectWrapper">
+                        <div class="custom-select-trigger">
+                            <span>Pilih guru</span>
+                            <div class="custom-select-arrow">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="custom-select-dropdown" id="guruDropdown"></div>
+                    </div>
+                    <select id="guruSelect" style="display:none;">
+                        <option value="">Pilih guru</option>
+                    </select>
+                </div>
+                <div class="guru-info" id="guruInfo"></div>
+            </div>
+
+            <!-- Deskripsi -->
+            <div class="field">
+                <label>Tugas</label>
+                <textarea id="deskripsi" placeholder="Deskripsi tugas" required></textarea>
+            </div>
+
+            <!-- Deadline -->
+            <div class="field">
+                <label>Deadline</label>
+                <div class="presets" id="presets">
+                    <button type="button" class="preset" data-preset="next">Pertemuan berikutnya</button>
+                    <button type="button" class="preset" data-days="1">Besok</button>
+                    <button type="button" class="preset" data-days="2">Lusa</button>
+                    <button type="button" class="preset" data-days="7">1 minggu</button>
+                    <button type="button" class="preset" data-days="custom" style="display:none;">Custom</button>
+                </div>
+                <input type="hidden" id="deadline">
+                <div class="deadline-display" id="deadlineDisplay">
+                    <span id="deadlineText">-- --- ----, --:--</span>
+                    <svg id="editIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                </div>
+                <input type="date" id="datePicker" class="date-input">
+                <input type="time" id="timePicker" class="time-input">
+            </div>
+
+            <!-- Foto -->
+            <div class="field">
+                <label>Foto (opsional)</label>
+                <div class="upload" id="upload">
+                    <input type="file" id="foto" accept="image/*">
+                    Klik atau drag foto <span>disini</span>
+                </div>
+                <div class="preview" id="preview">
+                    <img id="previewImg" src="" alt="">
+                    <div class="info">
+                        <div class="name" id="previewName"></div>
+                        <div class="size" id="previewSize"></div>
+                    </div>
+                    <button type="button" class="remove" id="removeFile">×</button>
+                </div>
+            </div>
+
+            <button type="submit" class="submit" id="submit">Kirim</button>
+        </form>
+
+        <!-- Custom DateTime Picker Modal (outside form to prevent event bubbling) -->
+        <div class="datetime-modal" id="datetimeModal">
+            <div class="datetime-modal-content">
+                <div class="datetime-modal-header">
+                    <span class="datetime-modal-title">Pilih Tanggal & Waktu</span>
+                    <button type="button" class="datetime-modal-close" id="closeModalBtn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="datetime-modal-body">
+                    <div class="calendar-header">
+                        <span class="calendar-month-year" id="calendarMonthYear">September 2026</span>
+                        <div class="calendar-nav">
+                            <button type="button" id="prevMonthBtn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                    <polyline points="15 18 9 12 15 6"></polyline>
+                                </svg>
+                            </button>
+                            <button type="button" id="nextMonthBtn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="calendar-weekdays">
+                        <span class="calendar-weekday">Min</span>
+                        <span class="calendar-weekday">Sen</span>
+                        <span class="calendar-weekday">Sel</span>
+                        <span class="calendar-weekday">Rab</span>
+                        <span class="calendar-weekday">Kam</span>
+                        <span class="calendar-weekday">Jum</span>
+                        <span class="calendar-weekday">Sab</span>
+                    </div>
+                    <div class="calendar-days" id="calendarDays"></div>
+                    <div class="time-picker-section">
+                        <div class="time-picker-label">Waktu</div>
+                        <div class="time-picker-input">
+                            <div class="time-field">
+                                <button type="button" id="hourUpBtn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                                        <polyline points="18 15 12 9 6 15"></polyline>
+                                    </svg>
+                                </button>
+                                <input type="number" id="hourInput" min="0" max="23" value="23">
+                                <button type="button" id="hourDownBtn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                            <span class="time-separator">:</span>
+                            <div class="time-field">
+                                <button type="button" id="minuteUpBtn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                                        <polyline points="18 15 12 9 6 15"></polyline>
+                                    </svg>
+                                </button>
+                                <input type="number" id="minuteInput" min="0" max="59" value="59">
+                                <button type="button" id="minuteDownBtn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="datetime-modal-footer">
+                    <button type="button" class="datetime-btn-cancel" id="cancelBtn">Batal</button>
+                    <button type="button" class="datetime-btn-confirm" id="confirmBtn">Konfirmasi</button>
+                </div>
+            </div>
+        </div>
+
+        <p class="brand">XII RPL 1 2026/2027</p>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

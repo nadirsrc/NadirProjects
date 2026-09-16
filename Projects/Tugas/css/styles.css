@@ -1,0 +1,837 @@
+/* =========================================
+   CSS Variables & Reset
+   ========================================= */
+:root {
+    --bg: #0A0A0B;
+    --card: #111111;
+    --border: #2a2a2a;
+    --text: #ffffff;
+    --text-muted: #888888;
+    --accent: #64748B;
+    --accent-hover: #475569;
+    --success: #4ade80;
+    --error: #f87171;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px;
+    -webkit-font-smoothing: antialiased;
+    animation: pageFadeIn 0.3s ease;
+}
+
+@keyframes pageFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* =========================================
+   Layout & Container
+   ========================================= */
+.container {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 32px;
+    transition: color 0.2s;
+}
+
+.back:hover { color: var(--text); }
+.back svg { width: 16px; height: 16px; }
+
+.header { margin-bottom: 28px; }
+
+/* =========================================
+   Logo
+   ========================================= */
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--accent) 0%, #758a96 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(100, 116, 139, 0.3);
+}
+
+.logo-icon svg { width: 20px; height: 20px; color: white; }
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.logo-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.2px;
+}
+
+.logo-subtitle {
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; letter-spacing: -0.3px; }
+.subtitle { font-size: 14px; color: var(--text-muted); }
+
+/* =========================================
+   Mode Toggle
+   ========================================= */
+.mode-toggle {
+    display: flex;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.mode-slider {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    height: calc(100% - 8px);
+    background: var(--accent);
+    border-radius: 8px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(100, 116, 139, 0.3);
+}
+
+.mode-toggle[data-active="siswa"] .mode-slider { transform: translateX(100%); }
+
+.mode-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: color 0.3s;
+    position: relative;
+    z-index: 1;
+}
+
+.mode-btn.active { color: white; }
+.mode-btn:not(.active):hover { color: var(--text); }
+
+/* =========================================
+   Mapel Toggle (Siswa mode)
+   ========================================= */
+.mapel-toggle {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.mapel-toggle-btn {
+    flex: 1;
+    padding: 8px 12px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mapel-toggle-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+
+.mapel-toggle-btn:not(.active):hover {
+    border-color: var(--accent);
+    color: var(--text);
+}
+
+/* =========================================
+   Form Fields
+   ========================================= */
+.field { margin-bottom: 20px; }
+
+label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+input::placeholder, textarea::placeholder { color: #444; }
+
+textarea {
+    resize: none;
+    min-height: 80px;
+}
+
+textarea::-webkit-scrollbar { display: none; }
+textarea {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* =========================================
+   Custom Select Dropdown
+   ========================================= */
+.custom-select { position: relative; }
+
+.custom-select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 48px;
+}
+
+.custom-select-trigger:hover { border-color: #444; }
+
+.custom-select-trigger.open {
+    border-color: var(--accent);
+    border-radius: 10px 10px 0 0;
+}
+
+.custom-select-trigger.input-error {
+    border-color: #ff5a5a !important;
+    box-shadow: 0 0 0 2px rgba(255, 90, 90, 0.2);
+}
+
+.custom-select-trigger span {
+    font-size: 14px;
+    color: #666;
+}
+
+.custom-select-trigger .selected-text { color: var(--text); }
+
+.custom-select-arrow {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
+}
+
+.custom-select-trigger.open .custom-select-arrow { transform: rotate(180deg); }
+
+.custom-select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #111;
+    border: 1px solid #64748B;
+    border-top: 1px solid #444;
+    border-radius: 0 0 10px 10px;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.2s ease;
+}
+
+.custom-select-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.custom-select-dropdown::-webkit-scrollbar { width: 6px; }
+.custom-select-dropdown::-webkit-scrollbar-track { background: var(--card); }
+.custom-select-dropdown::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+}
+
+.custom-select-option {
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    font-size: 14px;
+    color: #fff;
+    background: #111;
+}
+
+.custom-select-option:hover { background: rgba(100, 116, 139, 0.2); }
+.custom-select-option.selected { background: rgba(100, 116, 139, 0.3); }
+
+/* =========================================
+   Hide native selects
+   ========================================= */
+#mapel, #guruSelect, #siswaMapel {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 0;
+    height: 0;
+}
+
+/* =========================================
+   Guru Info
+   ========================================= */
+.guru-info {
+    display: none;
+    padding: 10px 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+.guru-info.show { display: block; }
+.guru-info strong { color: var(--text); }
+
+/* =========================================
+   Guru Select Wrapper
+   ========================================= */
+#guruSelectWrapper select {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+}
+
+#guruSelectWrapper select option { background: var(--card); color: var(--text); }
+
+/* =========================================
+   Deadline Presets
+   ========================================= */
+.presets {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.preset {
+    padding: 10px 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.preset:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.preset.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+    box-shadow: 0 2px 8px rgba(100, 116, 139, 0.3);
+}
+
+/* =========================================
+   Deadline Display
+   ========================================= */
+.deadline-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.deadline-display:hover { border-color: var(--accent); }
+.deadline-display span {
+    font-size: 14px;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+}
+
+.deadline-display svg {
+    width: 16px;
+    height: 16px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.date-input, .time-input { display: none; }
+
+/* =========================================
+   File Upload
+   ========================================= */
+.upload {
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.upload:hover { border-color: var(--accent); }
+.upload input { display: none; }
+.upload span { color: var(--accent); }
+
+/* =========================================
+   Preview
+   ========================================= */
+.preview {
+    display: none;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+    padding: 12px;
+    background: var(--card);
+    border-radius: 8px;
+}
+
+.preview.show { display: flex; }
+.preview img { width: 44px; height: 44px; object-fit: cover; border-radius: 6px; }
+.preview .info { flex: 1; min-width: 0; }
+.preview .name { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.preview .size { font-size: 11px; color: var(--text-muted); }
+.preview .remove {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.preview .remove:hover { color: var(--text); }
+
+/* =========================================
+   Submit Button
+   ========================================= */
+.submit {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-top: 12px;
+    letter-spacing: 0.3px;
+    color: white;
+}
+
+.submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(100, 116, 139, 0.4);
+}
+
+.submit:active { transform: translateY(0); }
+.submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* =========================================
+   Brand Footer
+   ========================================= */
+.brand {
+    text-align: center;
+    margin-top: 48px;
+    font-size: 11px;
+    color: #333;
+}
+
+/* =========================================
+   Alert
+   ========================================= */
+.alert {
+    display: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.alert.show { display: block; }
+.alert.success { background: rgba(74, 222, 128, 0.1); color: var(--success); }
+.alert.error { background: rgba(248, 113, 113, 0.1); color: var(--error); }
+
+/* =========================================
+   Validation Toast
+   ========================================= */
+.validation-toast {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100px);
+    background: var(--card);
+    border: 1px solid #333;
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    z-index: 10000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.05) inset;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+    max-width: calc(100vw - 48px);
+}
+
+.validation-toast.show { transform: translateX(-50%) translateY(0); }
+
+.validation-toast-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: rgba(255, 90, 90, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.validation-toast-icon svg { width: 16px; height: 16px; color: #ff5a5a; }
+.validation-toast-text { font-size: 13px; color: var(--text); font-weight: 500; }
+
+/* =========================================
+   Input Error
+   ========================================= */
+.input-error {
+    border-color: #ff5a5a !important;
+    box-shadow: 0 0 0 2px rgba(255, 90, 90, 0.2);
+}
+
+.custom-select-trigger.input-error {
+    border-color: #ff5a5a !important;
+    box-shadow: 0 0 0 2px rgba(255, 90, 90, 0.2);
+}
+
+/* =========================================
+   DateTime Modal
+   ========================================= */
+.datetime-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.datetime-modal.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.datetime-modal-content {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 320px;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+}
+
+.datetime-modal-content::-webkit-scrollbar { display: none; }
+
+.datetime-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid #333;
+}
+
+.datetime-modal-title { font-size: 16px; font-weight: 700; color: #ffffff; }
+
+.datetime-modal-close {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #222;
+    border: 1px solid #333;
+    color: #888;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.datetime-modal-close:hover { background: #333; color: #fff; }
+
+.datetime-modal-body { padding: 20px; background: #151515; }
+
+.datetime-modal-footer {
+    padding: 16px 20px;
+    border-top: 1px solid #333;
+    display: flex;
+    gap: 10px;
+    background: #151515;
+}
+
+.datetime-modal-footer button {
+    flex: 1;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.datetime-btn-cancel {
+    background: #222;
+    border: 1px solid #333;
+    color: #888;
+}
+
+.datetime-btn-cancel:hover { background: #2a2a2a; border-color: #444; color: #fff; }
+
+.datetime-btn-confirm {
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    color: white;
+}
+
+.datetime-btn-confirm:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+
+/* =========================================
+   Calendar
+   ========================================= */
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.calendar-month-year { font-size: 16px; font-weight: 700; color: #ffffff; }
+
+.calendar-nav { display: flex; gap: 8px; }
+
+.calendar-nav button {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #222;
+    border: 1px solid #333;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.calendar-nav button:hover { border-color: var(--accent); background: #2a2a2a; }
+.calendar-nav button:hover svg { stroke: var(--accent); }
+.calendar-nav button svg { width: 16px; height: 16px; stroke: #888; }
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 8px;
+}
+
+.calendar-weekday {
+    font-size: 11px;
+    font-weight: 600;
+    color: #666;
+    text-align: center;
+    padding: 8px 0;
+    text-transform: uppercase;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    background: #2a2a2a;
+    border: 1px solid #333;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.15s;
+    padding: 0;
+}
+
+.calendar-day:hover:not(.other-month):not(.disabled) {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+
+.calendar-day.selected {
+    background: var(--accent);
+    border: 2px solid var(--accent);
+    color: white;
+    box-shadow: 0 0 0 2px rgba(100, 116, 139, 0.3);
+}
+
+.calendar-day.today { border: 2px solid #4a4a4a; }
+.calendar-day.today.selected { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(100, 116, 139, 0.3); }
+.calendar-day.disabled { color: #555; background: #1a1a1a; cursor: not-allowed; }
+.calendar-day.other-month { color: #444; background: #111; border-color: #222; }
+
+/* =========================================
+   Time Picker
+   ========================================= */
+.time-picker-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+}
+
+.time-picker-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.time-picker-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.time-field { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+
+.time-field button {
+    width: 36px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #222;
+    border: 1px solid #333;
+    color: #888;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.time-field button:hover { border-color: var(--accent); color: var(--accent); background: #2a2a2a; }
+
+.time-field input {
+    width: 56px;
+    padding: 8px 4px;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+}
+
+.time-field input:focus { outline: none; border-color: var(--accent); }
+.time-separator { font-size: 24px; font-weight: 600; color: #888; margin-bottom: 18px; }
+
+/* =========================================
+   Simple Toggle
+   ========================================= */
+.form-field.field-hidden { display: none; }
