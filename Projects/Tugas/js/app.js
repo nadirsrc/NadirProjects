@@ -422,17 +422,12 @@
 
         // Real-time clock update (every second)
         let deadlineManuallySet = false; // Track if user set custom deadline
+        let timePickerManuallySet = false; // Track if user manually set time in picker
 
         function updateRealTimeClock() {
             const now = new Date();
             const h = String(now.getHours()).padStart(2, '0');
             const m = String(now.getMinutes()).padStart(2, '0');
-
-            // Update time picker inputs if modal is open
-            if (modalOpen) {
-                document.getElementById('hourInput').value = h;
-                document.getElementById('minuteInput').value = m;
-            }
 
             // Only update main display in real-time if no custom deadline is set
             if (!deadlineManuallySet) {
@@ -663,6 +658,7 @@
         function showDatePicker() {
             modalOpen = true; // Set global flag
             isOpeningPicker = true; // Set flag to prevent validation
+            timePickerManuallySet = false; // Reset time flag when opening
             setTimeout(() => { isOpeningPicker = false; }, 100); // Reset after 100ms
 
             const modal = document.getElementById('datetimeModal');
