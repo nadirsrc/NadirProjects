@@ -17,6 +17,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 body {
@@ -27,6 +31,7 @@ body {
     padding: 24px;
     -webkit-font-smoothing: antialiased;
     animation: pageFadeIn 0.3s ease;
+    overflow-x: hidden;
 }
 
 @keyframes pageFadeIn {
@@ -41,6 +46,7 @@ body {
     width: 100%;
     max-width: 420px;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 .back {
