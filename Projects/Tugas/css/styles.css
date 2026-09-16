@@ -122,74 +122,8 @@ body {
 .header { margin-bottom: 28px; }
 
 /* =========================================
-   Landing Page Features
+   Landing Button
    ========================================= */
-.features {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 24px;
-}
-
-.feature-card {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-}
-
-.feature-icon {
-    width: 40px;
-    height: 40px;
-    background: rgba(100, 116, 139, 0.15);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.feature-icon svg {
-    width: 20px;
-    height: 20px;
-    color: var(--accent);
-}
-
-.feature-card h3 {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 2px;
-}
-
-.feature-card p {
-    font-size: 12px;
-    color: var(--text-muted);
-}
-
-.upload-preview {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 16px;
-    border: 1px dashed var(--border);
-    border-radius: 10px;
-    color: var(--text-muted);
-    font-size: 13px;
-    margin-bottom: 20px;
-}
-
-.upload-preview svg {
-    width: 18px;
-    height: 18px;
-    opacity: 0.6;
-}
-
-/* Landing Button */
 .btn {
     width: 100%;
     padding: 16px;
@@ -202,7 +136,6 @@ body {
     font-family: inherit;
     cursor: pointer;
     transition: all 0.25s ease;
-    margin-bottom: 12px;
     letter-spacing: 0.3px;
 }
 
@@ -228,7 +161,6 @@ body {
 .logo-icon {
     width: 40px;
     height: 40px;
-    padding: 10px;
     background: linear-gradient(135deg, var(--accent) 0%, #758a96 100%);
     border-radius: 10px;
     display: flex;
@@ -238,7 +170,11 @@ body {
     flex-shrink: 0;
 }
 
-.logo-icon svg { width: 20px; height: 20px; color: white; }
+.logo-icon svg {
+    width: 24px;
+    height: 24px;
+    color: white;
+}
 
 .logo-text {
     display: flex;
