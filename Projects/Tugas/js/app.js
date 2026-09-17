@@ -995,6 +995,7 @@
             const deskripsi = document.getElementById('deskripsi').value.trim();
             const deadline = document.getElementById('deadline').value;
 
+            // Validation
             if (currentMode === 'guru') {
                 // Check mapel first
                 if (!mapel) {
@@ -1015,12 +1016,15 @@
                         return;
                     }
                 }
+            } else {
+                // Siswa mode validation
+                if (!siswa) {
+                    showValidationToast('Masukkan nama kamu', 'siswa');
+                    return;
+                }
             }
 
-            if (currentMode === 'siswa' && !siswa) {
-                showValidationToast('Masukkan nama kamu', 'siswa');
-                return;
-            }
+            // Common validations
             if (!mapel) {
                 showValidationToast('Pilih mapel terlebih dahulu', currentMode === 'siswa' ? 'siswaMapel' : 'mapel');
                 return;
