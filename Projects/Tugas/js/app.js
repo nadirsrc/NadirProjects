@@ -1,5 +1,5 @@
         const API_BASE = 'https://tugas.nadirprojects.me';
-        const API_KEY = 'd2131ac436000cf42d702d7fad0a9b8e3617556e0057c58be6e1ae2b2e25c893';
+        const API_KEY = '5bb1a8e71a3f01c7e5596640e69f8a216f421fc4a465e17049a01371ff575b4e';
 
         const NON_ACADEMIC = [
             "PJBL / Kebersihan Lingkungan",
