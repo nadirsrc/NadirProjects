@@ -280,15 +280,19 @@ function setDeadline(role, date, isScheduled = false) {
 
 function initDeadline() {
     deadlineManuallySet = false;
-    updateClock();
+    document.getElementById('guruDeadline').value = '';
+    document.getElementById('siswaDeadline').value = '';
 }
 
 function updateClock() {
     const now = new Date();
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
     const timeStr = `${String(now.getDate()).padStart(2, '0')} ${months[now.getMonth()]} ${now.getFullYear()}, ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-    if (!deadlineManuallySet) {
+    // Only update if no deadline is selected
+    if (!document.getElementById('guruDeadline').value) {
         document.getElementById('guruDeadlineText').textContent = timeStr;
+    }
+    if (!document.getElementById('siswaDeadline').value) {
         document.getElementById('siswaDeadlineText').textContent = timeStr;
     }
 }
@@ -299,16 +303,29 @@ let pickerYear, pickerMonth, pickerDay, modalOpen = false;
 function showDatePicker(role) {
     modalOpen = true;
     currentRole = role;
-    deadlineManuallySet = false;
     const display = document.getElementById(`${role}DeadlineDisplay`);
     display.classList.remove('input-error');
     if (errorField === display) errorField = null;
-    const today = new Date();
-    pickerYear = today.getFullYear();
-    pickerMonth = today.getMonth();
-    pickerDay = today.getDate();
-    document.getElementById('hourInput').value = String(today.getHours()).padStart(2, '0');
-    document.getElementById('minuteInput').value = String(today.getMinutes()).padStart(2, '0');
+
+    // Check if there's an existing deadline
+    const deadlineInput = document.getElementById(`${role}Deadline`);
+    let initialDate;
+
+    if (deadlineInput.value) {
+        // Parse existing deadline
+        const [datePart, timePart] = deadlineInput.value.split('T');
+        const [year, month, day] = datePart.split('-').map(Number);
+        const [hour, minute] = timePart.split(':').map(Number);
+        initialDate = new Date(year, month - 1, day, hour, minute);
+    } else {
+        initialDate = new Date();
+    }
+
+    pickerYear = initialDate.getFullYear();
+    pickerMonth = initialDate.getMonth();
+    pickerDay = initialDate.getDate();
+    document.getElementById('hourInput').value = String(initialDate.getHours()).padStart(2, '0');
+    document.getElementById('minuteInput').value = String(initialDate.getMinutes()).padStart(2, '0');
     renderCalendar();
     document.getElementById('datetimeModal').classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -579,8 +596,35 @@ document.querySelectorAll('.mapel-toggle-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         document.querySelectorAll('.mapel-toggle-btn').forEach(b => b.classList.toggle('active', b === btn));
         const type = btn.dataset.type;
-        document.getElementById('siswaMapelSelectWrapper').style.display = type === 'dropdown' ? 'block' : 'none';
-        document.getElementById('siswaMapelCustom').style.display = type === 'custom' ? 'block' : 'none';
+        const wrapper = document.querySelector('.mapel-inputs');
+        const nextPreset = document.getElementById('siswaNextPreset');
+        const slider = document.querySelector('.mapel-toggle-slider');
+
+        if (type === 'custom') {
+            wrapper.classList.add('custom-mode');
+            if (nextPreset) {
+                nextPreset.classList.remove('active');
+                nextPreset.classList.add('hiding');
+                setTimeout(() => {
+                    nextPreset.classList.add('hidden');
+                    nextPreset.classList.remove('hiding');
+                }, 350);
+            }
+            if (slider) slider.style.transform = 'translateX(100%)';
+        } else {
+            wrapper.classList.remove('custom-mode');
+            if (nextPreset) {
+                nextPreset.classList.remove('hidden');
+                nextPreset.classList.add('appearing');
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        nextPreset.classList.remove('appearing');
+                    });
+                });
+            }
+            if (slider) slider.style.transform = 'translateX(0)';
+        }
+
         if (type === 'custom') document.getElementById('siswaMapelCustom').focus();
         previewNextMeeting('siswa', type === 'custom' ? document.getElementById('siswaMapelCustom').value : document.getElementById('siswaMapel').value);
     });
@@ -615,3 +659,4 @@ setupFileUpload('guru');
 setupFileUpload('siswa');
 loadData();
 initDeadline();
+updateClock(); // Show clock immediately on load

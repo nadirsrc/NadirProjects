@@ -244,24 +244,27 @@
                 <div class="field">
                     <label>Mapel</label>
                     <div class="mapel-toggle">
+                        <div class="mapel-toggle-slider"></div>
                         <button type="button" class="mapel-toggle-btn active" data-type="dropdown">Pilih</button>
                         <button type="button" class="mapel-toggle-btn" data-type="custom">Custom</button>
                     </div>
-                    <div class="custom-select" id="siswaMapelSelectWrapper">
-                        <div class="custom-select-trigger">
-                            <span>Pilih mapel</span>
-                            <div class="custom-select-arrow">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg>
+                    <div class="mapel-inputs">
+                        <div class="custom-select" id="siswaMapelSelectWrapper">
+                            <div class="custom-select-trigger">
+                                <span>Pilih mapel</span>
+                                <div class="custom-select-arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </div>
                             </div>
+                            <div class="custom-select-dropdown" id="siswaMapelDropdown"></div>
                         </div>
-                        <div class="custom-select-dropdown" id="siswaMapelDropdown"></div>
+                        <select id="siswaMapel" style="display:none;">
+                            <option value="">Pilih mapel</option>
+                        </select>
+                        <input type="text" id="siswaMapelCustom" placeholder="Ketik mapel sendiri...">
                     </div>
-                    <select id="siswaMapel" style="display:none;">
-                        <option value="">Pilih mapel</option>
-                    </select>
-                    <input type="text" id="siswaMapelCustom" placeholder="Ketik mapel sendiri..." style="display: none;">
                 </div>
 
                 <!-- Deskripsi -->
@@ -274,7 +277,7 @@
                 <div class="field">
                     <label>Deadline</label>
                     <div class="presets" id="siswaPresets">
-                        <button type="button" class="preset" data-preset="next">Pertemuan berikutnya</button>
+                        <button type="button" class="preset" data-preset="next" id="siswaNextPreset">Pertemuan berikutnya</button>
                         <button type="button" class="preset" data-days="1">Besok</button>
                         <button type="button" class="preset" data-days="2">Lusa</button>
                         <button type="button" class="preset" data-days="7">1 minggu</button>
