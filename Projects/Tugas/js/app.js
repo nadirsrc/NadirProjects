@@ -122,16 +122,18 @@ function toggleSelect(wrapperId, dropdownId) {
 
 function selectMapel(role, value) {
     const wrapper = document.getElementById(role + 'MapelSelectWrapper');
-    const trigger = wrapper.querySelector('.custom-select-trigger span');
+    const trigger = wrapper.querySelector('.custom-select-trigger');
+    const triggerSpan = trigger.querySelector('span');
     const dropdown = document.getElementById(role + 'MapelDropdown');
     const select = document.getElementById(role + 'Mapel');
-    trigger.textContent = value;
+    triggerSpan.textContent = value;
     select.value = value;
     dropdown.querySelectorAll('.custom-select-option').forEach(opt => opt.classList.remove('selected'));
     dropdown.querySelector(`[data-value="${value}"]`).classList.add('selected');
-    wrapper.querySelector('.custom-select-trigger').classList.remove('open');
+    trigger.classList.remove('open', 'input-error');
     dropdown.classList.remove('show');
     activeSelect = null;
+    if (errorField === trigger) errorField = null;
 
     if (role === 'guru') {
         const teachers = mapelTeachersMap[value] || [];
@@ -155,6 +157,7 @@ function selectMapel(role, value) {
             guruSelectWrapper.style.display = 'none';
         }
     }
+    previewNextMeeting(role, value);
     autoUpdateDeadline(role, value);
 }
 
@@ -198,6 +201,34 @@ document.addEventListener('click', (e) => {
     }
 });
 
+function previewNextMeeting(role, mapel) {
+    const nextPreset = document.querySelector(`#${role}Presets .preset[data-preset="next"]`);
+    if (!nextPreset || !mapel) { nextPreset.textContent = 'Pertemuan berikutnya'; return; }
+    const schedule = SCHEDULE[mapel];
+    if (!schedule || schedule.length === 0) { nextPreset.textContent = 'Pertemuan berikutnya'; return; }
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    const JS_DAY = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    const SHORT_DAY = { 'Senin': 'Sen', 'Selasa': 'Sel', 'Rabu': 'Rab', 'Kamis': 'Kam', 'Jumat': 'Jum', 'Sabtu': 'Sab', 'Minggu': 'Min' };
+    let result = null;
+    for (let offset = 0; offset <= 14; offset++) {
+        const checkDate = new Date(now);
+        checkDate.setDate(now.getDate() + offset);
+        const checkDayName = JS_DAY[checkDate.getDay()];
+        for (const entry of schedule) {
+            if (entry.day === checkDayName) {
+                const [h, m] = entry.time.split(':').map(Number);
+                const classMinutes = h * 60 + m;
+                if (offset === 0 && classMinutes <= currentMinutes) continue;
+                result = SHORT_DAY[checkDayName];
+                break;
+            }
+        }
+        if (result) break;
+    }
+    nextPreset.textContent = result ? `${result} • Pertemuan berikutnya` : 'Pertemuan berikutnya';
+}
+
 function autoUpdateDeadline(role, mapel) {
     const nextPreset = document.querySelector(`#${role}Presets .preset[data-preset="next"]`);
     if (!nextPreset || !nextPreset.classList.contains('active')) return;
@@ -223,20 +254,28 @@ function autoUpdateDeadline(role, mapel) {
         }
         if (result) break;
     }
-    if (result) setDeadline(role, result);
+    if (result) setDeadline(role, result, true);
 }
 
-function formatDeadline(date) {
+function formatDeadline(date, showDay = false) {
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
-    return `${String(date.getDate()).padStart(2, '0')} ${months[date.getMonth()]} ${date.getFullYear()}, ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+    const days = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+    const dayName = days[date.getDay()];
+    const base = `${String(date.getDate()).padStart(2)} ${months[date.getMonth()]}`;
+    const time = `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+    if (showDay) return `${dayName}, ${base} • ${time}`;
+    return `${base} ${date.getFullYear()}, ${time}`;
 }
 
-function setDeadline(role, date) {
+function setDeadline(role, date, isScheduled = false) {
     deadlineManuallySet = true;
     const text = document.getElementById(`${role}DeadlineText`);
     const input = document.getElementById(`${role}Deadline`);
-    text.textContent = formatDeadline(date);
+    const display = document.getElementById(`${role}DeadlineDisplay`);
+    text.textContent = formatDeadline(date, isScheduled);
     input.value = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}T${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+    display.classList.remove('input-error');
+    if (errorField === display) errorField = null;
 }
 
 function initDeadline() {
@@ -261,6 +300,9 @@ function showDatePicker(role) {
     modalOpen = true;
     currentRole = role;
     deadlineManuallySet = false;
+    const display = document.getElementById(`${role}DeadlineDisplay`);
+    display.classList.remove('input-error');
+    if (errorField === display) errorField = null;
     const today = new Date();
     pickerYear = today.getFullYear();
     pickerMonth = today.getMonth();
@@ -350,8 +392,16 @@ function setupPresets(role) {
         document.querySelectorAll(`#${role}Presets .preset`).forEach(p => p.classList.remove('active'));
         btn.classList.add('active');
         if (btn.dataset.preset === 'next') {
+            if (role === 'siswa') {
+                const inputType = document.querySelector('.mapel-toggle-btn.active')?.dataset.type;
+                if (inputType === 'custom') {
+                    showValidationToast('Pilih mapel dari daftar untuk auto deadline', 'siswaMapelCustom');
+                    btn.classList.remove('active');
+                    return;
+                }
+            }
             const mapel = document.getElementById(role + 'Mapel').value;
-            if (!mapel) { showValidationToast('Pilih mapel terlebih dahulu'); btn.classList.remove('active'); return; }
+            if (!mapel) { showValidationToast('Pilih mapel terlebih dahulu', role + 'Mapel'); btn.classList.remove('active'); return; }
             autoUpdateDeadline(role, mapel);
         } else {
             const target = new Date();
@@ -389,14 +439,45 @@ function formatSize(bytes) {
 }
 
 let validationTimeout;
-function showValidationToast(msg) {
+let errorField = null;
+function showValidationToast(msg, fieldId = null) {
+    // Remove previous error styling
+    if (errorField) {
+        errorField.classList.remove('input-error');
+        errorField = null;
+    }
+
+    // Add error styling to field
+    if (fieldId) {
+        const field = document.getElementById(fieldId);
+        if (field) {
+            // If it's a SelectWrapper, target the trigger inside
+            if (fieldId.endsWith('SelectWrapper')) {
+                const trigger = field.querySelector('.custom-select-trigger');
+                if (trigger) {
+                    trigger.classList.add('input-error');
+                    errorField = trigger;
+                }
+            } else {
+                field.classList.add('input-error');
+                errorField = field;
+            }
+        }
+    }
+
     const toast = document.getElementById('validationToast');
     document.getElementById('validationToastText').textContent = msg;
     toast.classList.remove('show');
     void toast.offsetWidth;
     toast.classList.add('show');
     clearTimeout(validationTimeout);
-    validationTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
+    validationTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+        if (errorField) {
+            errorField.classList.remove('input-error');
+            errorField = null;
+        }
+    }, 3000);
 }
 
 document.getElementById('guruForm').addEventListener('submit', async (e) => {
@@ -407,11 +488,11 @@ document.getElementById('guruForm').addEventListener('submit', async (e) => {
     const guruSelectWrapper = document.getElementById('guruSelectWrapper');
     const deskripsi = document.getElementById('guruDeskripsi').value.trim();
     const deadline = document.getElementById('guruDeadline').value;
-    if (!mapel) { showValidationToast('Pilih mapel'); return; }
-    if (guruSelectWrapper.style.display !== 'none' && !guruSelect.value) { showValidationToast('Pilih guru'); return; }
-    if (!guru && guruSelectWrapper.style.display === 'none') { showValidationToast('Pilih mapel'); return; }
-    if (!deskripsi) { showValidationToast('Masukkan deskripsi tugas'); return; }
-    if (!deadline) { showValidationToast('Pilih deadline'); return; }
+    if (!mapel) { showValidationToast('Pilih mapel', 'guruMapelSelectWrapper'); return; }
+    if (guruSelectWrapper.style.display !== 'none' && !guruSelect.value) { showValidationToast('Pilih guru', 'guruSelect'); return; }
+    if (!guru && guruSelectWrapper.style.display === 'none') { showValidationToast('Pilih mapel', 'guruMapel'); return; }
+    if (!deskripsi) { showValidationToast('Masukkan deskripsi tugas', 'guruDeskripsi'); return; }
+    if (!deadline) { showValidationToast('Pilih deadline', 'guruDeadlineDisplay'); return; }
     const submitBtn = document.getElementById('guruSubmit');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Mengirim...';
@@ -445,20 +526,15 @@ document.getElementById('siswaForm').addEventListener('submit', async (e) => {
     const deskripsi = document.getElementById('siswaDeskripsi').value.trim();
     const deadline = document.getElementById('siswaDeadline').value;
 
-    console.log('Siswa submit - inputType:', inputType);
-    console.log('Siswa submit - siswaMapelCustom:', siswaMapelCustom);
-    console.log('Siswa submit - siswaMapelValue:', siswaMapelValue);
-    console.log('Siswa submit - mapel:', mapel);
-
-    if (!siswa) { showValidationToast('Masukkan nama kamu'); return; }
-    if (!mapel) { showValidationToast('Mapel kosong! type:' + inputType + ' val:' + mapel); return; }
-    if (!deskripsi) { showValidationToast('Masukkan deskripsi tugas'); return; }
-    if (!deadline) { showValidationToast('Pilih deadline'); return; }
+    if (!siswa) { showValidationToast('Masukkan nama kamu', 'siswaName'); return; }
+    if (!mapel) { showValidationToast(inputType === 'custom' ? 'Masukkan nama mapel' : 'Pilih mapel', inputType === 'custom' ? 'siswaMapelCustom' : 'siswaMapelSelectWrapper'); return; }
+    if (!deskripsi) { showValidationToast('Masukkan deskripsi tugas', 'siswaDeskripsi'); return; }
+    if (!deadline) { showValidationToast('Pilih deadline', 'siswaDeadlineDisplay'); return; }
     const submitBtn = document.getElementById('siswaSubmit');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Mengirim...';
     try {
-        const payload = { submittedBy: siswa, pengirimType: 'siswa', guru: '', siswa, mapel, deskripsi, deadline };
+        const payload = { submittedBy: siswa, pengirimType: 'siswa', mapel, deskripsi, deadline };
         if (selectedFile) {
             payload.foto = await new Promise(resolve => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.readAsDataURL(selectedFile); });
             payload.fotoExt = selectedFile.name.split('.').pop();
@@ -506,7 +582,12 @@ document.querySelectorAll('.mapel-toggle-btn').forEach(btn => {
         document.getElementById('siswaMapelSelectWrapper').style.display = type === 'dropdown' ? 'block' : 'none';
         document.getElementById('siswaMapelCustom').style.display = type === 'custom' ? 'block' : 'none';
         if (type === 'custom') document.getElementById('siswaMapelCustom').focus();
+        previewNextMeeting('siswa', type === 'custom' ? document.getElementById('siswaMapelCustom').value : document.getElementById('siswaMapel').value);
     });
+});
+
+document.getElementById('siswaMapelCustom').addEventListener('input', (e) => {
+    previewNextMeeting('siswa', e.target.value);
 });
 
 // Event listeners
